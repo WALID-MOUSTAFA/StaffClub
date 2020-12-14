@@ -14,7 +14,7 @@ class Member extends Model
         protected $password;
         protected $pic;
 
-        protected $fillable [
+        protected $fillable =  [
                 "nat_id",
                 "fullname",
                 "password",

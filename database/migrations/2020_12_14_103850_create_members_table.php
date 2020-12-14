@@ -15,7 +15,7 @@ class CreateMembersTable extends Migration
             $table->string("nat_id", 14);
             $table->enum("gender", ["male", "female"]);
             $table->double("age", 10, 2)->nullable();
-            $table->string("password", 1000);
+            $table->string("password", 1000)->nullable(); //TODO(walid): remove the nullable;
             $table->text("pic")->nullable();
         });
     }
