@@ -22,5 +22,10 @@ class Member extends Model
         ];
 
 
+        public function relatives()
+        {
+                return $this->hasMany(FamilyRelative::class);
+        }
+
         
 }

@@ -13,4 +13,17 @@ class FamilyRelative extends Model
         protected $pic ;
         protected $fullname;
 
+        // protected $fillable= 
+
+        public function kinship()
+        {
+                return $this->belongsTo(Kinship::class);
+        }
+
+        
+        public function member()
+        {
+                return $this->belongsTo(Member::class);
+        }
+        
 }

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Member;
 
+
+//TODO(walid): replace eastern arabic numbers;
+
 class LoginController extends Controller
 {
 
@@ -30,7 +33,7 @@ class LoginController extends Controller
                 
                 $member= Member::where([
                         ["nat_id", "=", $nat_id]
-                ])->first();
+                ])->with("relatives")->first();
 
                 
                 if($member) {
@@ -38,6 +41,7 @@ class LoginController extends Controller
                         $password = $member->password;
                         
                         if($password == null) {
+                                //TODO(walid): handle the first login;
                                 $this->handle_first_login();
                                 
                         } else if ($password != null && request()->get("password") == null){ 
@@ -49,6 +53,8 @@ class LoginController extends Controller
 
                                 if($member-> password == request()->get("password")) {
                                         //TODO(walid): hash the password;
+                                        
+                                        session()->put("user", $member);
                                         return redirect("/profile");
 
                                 } else {

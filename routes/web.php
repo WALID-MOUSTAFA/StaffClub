@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 
 Route::get("/login", "App\Http\Controllers\LoginController@getLogin");
+
 Route::post("/login", "App\Http\Controllers\LoginController@postLogin");
+
+Route::get("/profile", "App\Http\Controllers\ProfileController@getProfile")
+        ->middleware("checkMemberLogin");
+
+Route::post("/add-relative", "App\Http\Controllers\ProfileController@addRelative")
+        ->middleware("checkMemberLogin");
+
+
+//TODO(walid): make a logout route;
