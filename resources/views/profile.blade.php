@@ -55,7 +55,7 @@
 		     </ul> -->
 		     <ul class="navbar-nav ml-auto">
 
-			 <button class="mx-1 my-1 btn btn-warning">
+			 <button id="edit-member" class="mx-1 my-1 btn btn-warning">
 			     تعديل بياناتي
 			 </button>
 			 
@@ -391,6 +391,69 @@
 				    @endforeach
 				</select>
 			    </div>
+
+			    <div class="input-wrapper">
+				<div class="custom-file">
+				    <input type="file" class="custom-file-input" id="" name="pic">
+				    <label class="custom-file-label" for="">أضف صورة</label>
+				</div>
+			    </div>
+
+			    
+			    
+			</form>
+		    </div>
+
+		    <div class="modal-footer">
+			<button type="submit" form="add-relative-form"  class="btn btn-success">إضافة</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+		    </div>
+		</div>
+	    </div>
+	</div> <!-- add relatvie modal -->
+
+
+	<!-- edit member modal -->
+	<div id="edit-member-modal" class="modal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		    <div class="modal-header">
+			<h5 class="modal-title">Modal title</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			</button>
+		    </div>
+
+		    <div class="modal-errors"></div>
+		    
+		    <div class="modal-body">
+			<form id="edit-member-form" class="edit-member-form" method="post" action="/edit-member/{{ $user->id }}">
+			    @csrf
+
+			    
+			    <div class="input-wrapper">
+				<input type="text" name="fullname" class="form-control" id=""  value="{{ $user->fullname }}" placeholder="الاسم الكامل" />
+			    </div>
+
+			    <div class="input-wrapper">
+				<input type="text" name="phone" class="form-control" id=""  value="{{ $user->phone }}" placeholder="رقم الهاتف" />
+			    </div>
+
+			    <div class="input-wrapper">
+				<div class="custom-file">
+				    <input type="file" class="custom-file-input" id="" name="pic">
+				    <label class="custom-file-label" for="">تغيير الصورة</label>
+				</div>
+			    </div>
+			    
+			    
+			    <div class="input-wrapper">
+				<select name="gender" class="custom-select">
+				    <option value="male" {{ $user->gender=="male"? "selected" : "" }}>ذكر</option>
+				    <option value="female"  {{ $user->gender=="female"? "selected" : "" }} >أنثى</option>
+				</select>
+			    </div>
+			    
 			    
 			    
 			    
@@ -398,26 +461,30 @@
 		    </div>
 
 		    <div class="modal-footer">
-			<button type="submit" form="add-relative-form" type="button" class="btn btn-success">إضافة</button>
+			<button type="submit" form="edit-member-form" type="button" class="btn btn-success">إضافة</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
 		    </div>
 		</div>
 	    </div>
-	</div> <!-- add relatvie modal -->
+	</div> <!-- edit member modal -->
 
 	
 	
+	
 
+
+	
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.bundle.min.js" ></script>
 	<script src="{{ asset("/scripts/bootstrap-notify-3.1.3/dist/bootstrap-notify.min.js") }}"></script>
 	
 	<script>
+
 	 $(".edit-relative").on("click", function() {
 	     $("#edit-relative-modal").modal("toggle");
 	 });
-
+	 
 	 $(".view-relative").on("click", function() {
 	     $("#view-relative-modal").modal("toggle");
 	 });
@@ -427,7 +494,31 @@
 	     $("#add-relative-modal").modal("toggle");
 	 });
 
+	 $("#edit-member").on("click", function() {
+	     $("#edit-member-modal").modal("toggle");
+	 });
+	 
 	</script>
+	
+
+
+	{{-- handle if validation errors occured in edit member modal --}}
+	@if(session()->has("edit-member-errors"))
+	    <script>
+		$("#edit-member-modal").modal("toggle");
+		var error_element= "<div class='alert alert-danger' >";
+		error_element += "<ul>";
+
+		@foreach(session()->get("edit-member-errors") as $error)
+		    error_element += "<li> " + "{{ $error }}" + "</li>";
+		@endforeach
+
+		error_element += "</ul>";
+	     	error_element += "</div>";
+		
+	     $("#edit-member-modal div.modal-errors").append(error_element);
+	    </script>
+	@endif
 
 
 	@if(session()->has("add-relative-success"))

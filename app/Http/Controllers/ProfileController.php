@@ -11,7 +11,8 @@ class ProfileController extends Controller
         //TODO(walid): add the rest of relative functionality;
         //TODO(walid): add member modify data functionality;
         //TODO(walid): use bootstrap card pic instead of custom one;
-        
+        //TODO(walid): edit member data;
+
         
         public function getProfile ()
                 
@@ -31,7 +32,23 @@ class ProfileController extends Controller
         
         public function editMember($id)
         {
+
+                // if(request()->get("fullname") == null ) {
+                //         session()->flash("edit-member-errors", ["هذا الحقل مطلوب"] );
+                //         return back();
+                // }
                 
+                $current_user= session()->get("user");
+                $current_user->fullname= request()->get("fullname");
+                $current_user->phone = request()->get("phone");
+                $current_user->gender = request()->get("gender");
+
+                
+                if($current_user->save()) {
+                        session()->put("user", $current_user);
+                        return back();
+                } //TODO(walid): handle errors;
+
         }
         
         
@@ -68,6 +85,7 @@ class ProfileController extends Controller
                 
         }
 
+        
         
 
 }

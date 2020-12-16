@@ -35,11 +35,11 @@ class LoginController extends Controller
                         ["nat_id", "=", $nat_id]
                 ])->with("relatives")->first();
 
-                
+
+
                 if($member) {
 
                         $password = $member->password;
-                        
                         if($password == null) {
                                 //TODO(walid): handle the first login;
                                 $this->handle_first_login();
@@ -67,7 +67,8 @@ class LoginController extends Controller
                         }//handle normal login;
 
                 }else {
-
+                        session()->flash("errors",  ["هذا العضو غير موجود! تأكد من الرقم القومي"]);
+                        return back();
                         //TODO(walid): handle member not found;
                         
 

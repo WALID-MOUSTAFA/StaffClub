@@ -22,6 +22,10 @@ Route::post("/login", "App\Http\Controllers\LoginController@postLogin");
 Route::get("/profile", "App\Http\Controllers\ProfileController@getProfile")
         ->middleware("checkMemberLogin");
 
+Route::post("/edit-member/{id}", "App\Http\Controllers\ProfileController@editMember" )
+                ->middleware("checkMemberLogin");
+
+
 Route::post("/add-relative", "App\Http\Controllers\ProfileController@addRelative")
         ->middleware("checkMemberLogin");
 
