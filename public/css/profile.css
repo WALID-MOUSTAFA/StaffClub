@@ -81,7 +81,7 @@ div.profile-wrapper div.wide-section div.relatives .relative
     margin-bottom: 1rem;
 }
 
-form.add-relative-form .input-wrapper input {
+form input {
     background-color: #f2f2f2 !important;
     border: none;
 }

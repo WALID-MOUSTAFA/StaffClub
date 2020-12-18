@@ -74,7 +74,7 @@
 		    
 		    <div class="side-section col-sm-4">
 			<div class="avatar">
-			    <img alt="" src="https://picsum.photos/300/300"/>
+			    <img alt="" src="uploads/{{ $user->pic }}"/>
 			</div>
 			<hr/>
 
@@ -122,10 +122,6 @@
 					<td>{{ $user->phone }}</td>
 				    </tr>
 
-				    <tr>
-					<td class="td-key">العنوان</td>
-					<td >{{ $user->address }}</td>
-				    </tr>
 
 				    <tr>
 					<td class="td-key">البريد الإلكتروني</td>
@@ -159,137 +155,159 @@
 				<div class="row relatives_gallery">
 
 				    @foreach($user->relatives()->get() as $relative )
+					
+					<div class="card relative col-md-5">
 
-				    <!-- edit modal -->
-				    <div id="edit-relative-modal" class="modal" tabindex="-1" role="dialog">
-					<div class="modal-dialog" role="document">
-					    <div class="modal-content">
-						<div class="modal-header">
-						    <h5 class="modal-title">تعديل الأقارب</h5>
-						    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						    </button>
-						</div>
-
-						<div class="modal-body">
-						    <form action="">
-							@csrf
-							<div>
-							    <label for="">الاسم</label>
-							    <input name="fullname" type="text" value="{{ $relative -> fullname }}"/>
-							</div>
-							<div>
-							    <label for="">الرقم القومي</label>
-							    <input name="nat_id" type="text" value="{{ $relative -> nat_id }}"/>
-							</div>
-							
-							<div class="custom-control custom-checkbox">
-							    <label for="">الجنس</label>
-
-
-							    
-
-							    <div class="custom-control custom-radio">
-								<input type="radio" id="" name="gender"
-								       {{ $relative->gender == "male"? "checked": "" }}
-								       class="custom-control-input">
-								<label class="custom-control-label" for="">ذكر</label>
-							    </div>
-							    
-							    <div class="custom-control custom-radio">
-								<input type="radio" id="" name="gender"
-								       {{ $relative->gender == "female"? "checked": "" }}
-								       class="custom-control-input">
-								<label class="custom-control-label" for="">أنثى</label>
-							    </div>
-							    
-
-							    <div>
-								<label for="">العمر</label>
-								<input name="age" type="text" value="{{ $relative -> age }}"/>
-							    </div>
-
-							    <div class="custom-file">
-								<input type="file" class="custom-file-input" id="" name="pic">
-								<label class="custom-file-label" for="">تغيير الصورة</label>
-							    </div>
-							    
+					    <!-- modals -->
+					    <!-- edit relative modal -->
+					    <div class="edit-relative-modal modal" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+						    <div class="modal-content">
+							<div class="modal-header">
+							    <h5 class="modal-title">تعديل الأقارب</h5>
+							    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							    </button>
 							</div>
 
+							<div class="modal-body">
+							    <form method="post" id="edit-relative-form"
+								  action="/edit-relative/{{ $relative->id }}"
+								  enctype="multipart/form-data">
+								@csrf
+								<div class="input-wrapper">
+								    <label for="">الاسم</label>
+								    <input class="form-control" name="fullname" type="text" value="{{ $relative -> fullname }}"/>
+								</div>
+								<div class="input-wrapper">
+								    <label for="">الرقم القومي</label>
+								    <input class="form-control" name="nat_id" type="text" value="{{ $relative -> nat_id }}"/>
+								</div>
+
+								
+								
+								<div class="input-wrapper">
+								    <label for="">السن</label>
+								    <input class="form-control" name="age" type="text" value="{{ $relative -> age }}"/>
+								</div>
+
+								<div class="input-wrapper">
+								    <label for="">صلة القرابة</label>
+								    <select name="kinship" class="form-control custom-select">
+									
+									
+									@foreach($kinships as $kinship)
+
+									    <option value="{{$kinship->id }}"
+											   {{ $relative->kinship->type ==  $kinship->type?  "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+										    {{ $relative->kinship->type ==  $kinship->type? "selected" : "" }}
+									    >  
+										{{ $kinship->type == "son"? "ابن" : "" }}
+										{{ $kinship->type == "daughter"? "ابنة" : "" }}
+										{{ $kinship->type == "father"? "اب" : "" }}
+										{{ $kinship->type == "mother"? "أم" : "" }}
+										{{ $kinship->type == "sister"? "أخت" : "" }}
+										{{ $kinship->type == "brother"? "أخ" : "" }}
+										{{ $kinship->type == "husband"? "زوج" : "" }}
+										{{ $kinship->type == "wife"? "زوجة" : "" }}
+
+									    </option>
+									    
+									@endforeach
+								    </select>
+								</div>
+
+								
+								
+								<div class="custom-file">
+								    <input type="file" class="custom-file-input" id="" name="pic">
+								    <label class="custom-file-label" for="">تغيير الصورة</label>
+								</div>
+								
+								
+								
+							</div>
 							
-						    </form>
-						</div>
-						
-						<div class="modal-footer">
-						    <button type="button" class="btn btn-primary">Save changes</button>
-						    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						</div>
-					    </div>
-					</div>
-				    </div> <!-- edit relative modal -->
-				    
+							<div class="modal-footer">
+							    <button type="submit" class="btn btn-warning submit-edit-relative-form">تعديل</button>
+							    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+							</div>
 
-				    <!-- view relative modal -->
-				    <div id="view-relative-modal" class="modal" tabindex="-1" role="dialog">
-					<div class="modal-dialog" role="document">
-					    <div class="modal-content">
-						<div class="modal-header">
-						    <h5 class="modal-title">عرض القريب</h5>
-						    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						    </button>
+							    </form>
+
+						    </div>
 						</div>
+					    </div> <!-- edit relative modal -->
+					    
 
-						<div class="modal-body">
-						    <table class="table">
-							<tr>
-							    <td>الاسم</td>
-							    <td>{{ $relative->fullname }}</td>
-							</tr>
+					    <!-- view relative modal -->
+					    <div class="view-relative-modal modal" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+						    <div class="modal-content">
+							<div class="modal-header">
+							    <h5 class="modal-title">عرض القريب</h5>
+							    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							    </button>
+							</div>
 
-							<tr>
-							    <td> السن</td>
-							    <td>{{ $relative->age }}</td>
-							</tr>
+							<div class="modal-body">
+							    <table class="table">
+								<tr>
+								    <td>الاسم</td>
+								    <td>{{ $relative->fullname }}</td>
+								</tr>
+
+								<tr>
+								    <td>الرقم القومي</td>
+								    <td>{{ $relative->nat_id }}</td>
+								</tr>
+
+								
+								<tr>
+								    <td> السن</td>
+								    <td>{{ $relative->age }}</td>
+								</tr>
+
+								<tr>
+								    <td>القرابة</td>
+								    <td>{{ $relative->kinship->type }}</td>
+								</tr>
+
+								
+
+								<tr>
+								    <td>الصورة</td>
+								    <td><img class="img-thumbnail" src="/uploads/{{$relative-> pic }}" /></td>
+								</tr>
+
+								
+							    </table>
+							</div>
 							
-							<tr>
-							    <td>الجنس</td>
-							    <td>{{ $relative->gender }}</td>
-							</tr>
-
-							<tr>
-							    <td>الصورة</td>
-							    <td><img class="img-thumbnail" src="{{ $relative-> pic }}" /></td>
-							</tr>
-
-							
-						    </table>
+							<div class="modal-footer">
+							    <button type="button" class="btn btn-primary">Save changes</button>
+							    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						    </div> 
 						</div>
-						
-						<div class="modal-footer">
-						    <button type="button" class="btn btn-primary">Save changes</button>
-						    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						</div>
-					    </div> 
-					</div>
-				    </div><!-- view relative modal -->
+					    </div><!-- view relative modal -->
 
-				    
-
-				    
-
-				    
-
-					<div class="card relative col-md-5"
-					     
-					>
-
-					    <div class="avatar">
-						<img class="img-thumbnail"
-						     alt=""
-						     src="{{ $relative->pic }}">
-					    </div>
-
+					    <!-- end-modals -->
+					    
+					<img class="card-img-top" src="/uploads/{{$relative->pic }}" alt="الصورة الشخصية">
+					<!-- <div class="avatar">
+					     <img class="img-thumbnail"
+					     alt=""
+					     src="{{ $relative->pic }}">
+					     </div>
+					-->
 					    <div class="">
 						<table class="table">
 						    <tr>
@@ -309,11 +327,15 @@
 						<button class="edit-relative btn btn-warning">
 						    تعديل
 						</button>
-
-						<button class="delete-relative btn btn-danger">
-						    حذف
-						</button>
 						
+
+						<form method="post" class="delete-relative-form form-inline" action="/delete-relative/ {{$relative->id }}">
+						    @csrf
+						    <button class="delete-relative btn btn-danger">
+							حذف
+						    </button>
+						</form>
+
 					    </div>
 					    
 
@@ -348,7 +370,7 @@
 	<!-- loop indpendent modals -->
 
 	<!-- add relatvie modal -->
-	<div id="add-relative-modal" class="modal" tabindex="-1" role="dialog">
+	<div class="add-relative-modal modal" tabindex="-1" role="dialog">
 	    <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		    <div class="modal-header">
@@ -358,8 +380,10 @@
 			</button>
 		    </div>
 
+		    <div class="modal-errors"></div>
+
 		    <div class="modal-body">
-			<form id="add-relative-form" class="add-relative-form" method="post" action="/add-relative">
+			<form id="add-relative-form" class="add-relative-form" method="post" action="/add-relative" enctype="multipart/form-data">
 			    @csrf
 			    
 			    
@@ -372,12 +396,13 @@
 			    </div>
 
 			    
-			    <div class="input-wrapper">
-				<select name="gender" class="custom-select">
-				    <option value="male" selected>ذكر</option>
-				    <option value="female">أنثى</option>
-				</select>
-			    </div>
+			    <!-- <div class="input-wrapper">
+				 <select name="gender" class="custom-select">
+				 <option value="male" selected>ذكر</option>
+				 <option value="female">أنثى</option>
+				 </select>
+				 </div>
+			    -->
 			    
 			    <div class="input-wrapper">
 				<select name="kinship" class="custom-select">
@@ -386,8 +411,15 @@
 					<option value="{{$kinship->id }}">
 					    {{ $kinship->type == "son"? "ابن" : "" }}
 					    {{ $kinship->type == "daughter"? "ابنة" : "" }}
-					</option>
+					    {{ $kinship->type == "father"? "اب" : "" }}
+					    {{ $kinship->type == "mother"? "أم" : "" }}
+					    {{ $kinship->type == "sister"? "أخت" : "" }}
+					    {{ $kinship->type == "brother"? "أخ" : "" }}
+					    {{ $kinship->type == "husband"? "زوج" : "" }}
+					    {{ $kinship->type == "wife"? "زوجة" : "" }}
 
+					</option>
+					
 				    @endforeach
 				</select>
 			    </div>
@@ -414,7 +446,7 @@
 
 
 	<!-- edit member modal -->
-	<div id="edit-member-modal" class="modal" tabindex="-1" role="dialog">
+	<div class="edit-member-modal modal" tabindex="-1" role="dialog">
 	    <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		    <div class="modal-header">
@@ -427,34 +459,33 @@
 		    <div class="modal-errors"></div>
 		    
 		    <div class="modal-body">
-			<form id="edit-member-form" class="edit-member-form" method="post" action="/edit-member/{{ $user->id }}">
+			<form id="edit-member-form" class="edit-member-form" method="post" action="/edit-member/{{ $user->id }}" enctype="multipart/form-data">
 			    @csrf
 
 			    
 			    <div class="input-wrapper">
+				<label for="">الاسم بالكامل</label>
 				<input type="text" name="fullname" class="form-control" id=""  value="{{ $user->fullname }}" placeholder="الاسم الكامل" />
 			    </div>
 
 			    <div class="input-wrapper">
+				<label for="">رقم الهاتف</label>
 				<input type="text" name="phone" class="form-control" id=""  value="{{ $user->phone }}" placeholder="رقم الهاتف" />
 			    </div>
-
-			    <div class="input-wrapper">
-				<div class="custom-file">
-				    <input type="file" class="custom-file-input" id="" name="pic">
-				    <label class="custom-file-label" for="">تغيير الصورة</label>
-				</div>
-			    </div>
 			    
 			    
 			    <div class="input-wrapper">
+				<label for="">الجنس</label>
 				<select name="gender" class="custom-select">
 				    <option value="male" {{ $user->gender=="male"? "selected" : "" }}>ذكر</option>
 				    <option value="female"  {{ $user->gender=="female"? "selected" : "" }} >أنثى</option>
 				</select>
 			    </div>
 			    
-			    
+			    <div class="custom-file">
+				<input type="file" class="custom-file-input" id="" name="pic">
+				<label class="custom-file-label" for="">تغيير الصورة</label>
+			    </div>			    
 			    
 			    
 			</form>
@@ -482,22 +513,23 @@
 	<script>
 
 	 $(".edit-relative").on("click", function() {
-	     $("#edit-relative-modal").modal("toggle");
+	     $(this).closest(".relative").children(".edit-relative-modal").modal("toggle");
 	 });
 	 
 	 $(".view-relative").on("click", function() {
-	     $("#view-relative-modal").modal("toggle");
+	     $(this).closest(".relative").children(".view-relative-modal").modal("toggle");
 	 });
 
 	 
 	 $("#add-relative").on("click", function() {
-	     $("#add-relative-modal").modal("toggle");
+	     $(".add-relative-modal").modal("toggle");
 	 });
 
 	 $("#edit-member").on("click", function() {
-	     $("#edit-member-modal").modal("toggle");
+	     $(".edit-member-modal").modal("toggle");
 	 });
 	 
+
 	</script>
 	
 
@@ -505,18 +537,35 @@
 	{{-- handle if validation errors occured in edit member modal --}}
 	@if(session()->has("edit-member-errors"))
 	    <script>
-		$("#edit-member-modal").modal("toggle");
-		var error_element= "<div class='alert alert-danger' >";
-		error_element += "<ul>";
+	     $("#edit-member-modal").modal("toggle");
+	     var error_element= "<div class='alert alert-danger' >";
+	     error_element += "<ul>";
 
-		@foreach(session()->get("edit-member-errors") as $error)
-		    error_element += "<li> " + "{{ $error }}" + "</li>";
-		@endforeach
+	     @foreach(session()->get("edit-member-errors") as $error)
+	     error_element += "<li> " + "{{ $error }}" + "</li>";
+	     @endforeach
 
-		error_element += "</ul>";
-	     	error_element += "</div>";
-		
+	     error_element += "</ul>";
+	     error_element += "</div>";
+	     
 	     $("#edit-member-modal div.modal-errors").append(error_element);
+	    </script>
+	@endif
+
+	@if(session()->has("add-relative-errors"))
+	    <script>
+	     $("#add-relative-modal").modal("toggle");
+	     var error_element= "<div class='alert alert-danger' >";
+	     error_element += "<ul>";
+
+	     @foreach($errors->all() as $error)
+	     error_element += "<li> " + "{{ $error }}" + "</li>";
+	     @endforeach
+
+	     error_element += "</ul>";
+	     error_element += "</div>";
+	     
+	     $("#add-relative-modal div.modal-errors").append(error_element);
 	    </script>
 	@endif
 

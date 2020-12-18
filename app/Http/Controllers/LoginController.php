@@ -41,8 +41,9 @@ class LoginController extends Controller
 
                         $password = $member->password;
                         if($password == null) {
-                                //TODO(walid): handle the first login;
-                                $this->handle_first_login();
+                                session()->put("user", $member);
+                                redirect("/profile");
+                                
                                 
                         } else if ($password != null && request()->get("password") == null){ 
                                 session()->flash("use_password", "");
@@ -69,7 +70,6 @@ class LoginController extends Controller
                 }else {
                         session()->flash("errors",  ["هذا العضو غير موجود! تأكد من الرقم القومي"]);
                         return back();
-                        //TODO(walid): handle member not found;
                         
 
                 } // no member
@@ -78,14 +78,9 @@ class LoginController extends Controller
         }
 
 
-        private function handle_first_login() {
-                echo "first login";
+        public function logout(){
+                session()->flush();
+                return redirect("/login");
         }
-
-
-
-
-
-
         
 }
