@@ -73,3 +73,77 @@ Route::post("/admin/members/edit-relative/{id}",
 
 
 
+Route::get("/admin/polls",
+           "App\Http\Controllers\PollController@index")
+        ->middleware("checkMemberLogin");
+
+
+
+Route::get("/admin/polls/add",
+           "App\Http\Controllers\PollController@getAddSinglePoll")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/admin/polls/add",
+           "App\Http\Controllers\PollController@postAddSinglePoll")
+        ->middleware("checkMemberLogin");
+
+
+
+
+Route::get("/admin/polls/{id}",
+           "App\Http\Controllers\PollController@viewSinglePoll")
+        ->middleware("checkMemberLogin");
+
+
+
+Route::get("/admin/polls/edit/{id}",
+           "App\Http\Controllers\PollController@getEditSinglePoll")
+        ->middleware("checkMemberLogin");
+
+
+
+Route::post("/admin/polls/edit/{id}",
+           "App\Http\Controllers\PollController@postEditSinglePoll")
+        ->middleware("checkMemberLogin");
+
+Route::post("/admin/polls/delete/{id}",
+           "App\Http\Controllers\PollController@postDeleteSinglePoll")
+        ->middleware("checkMemberLogin");
+
+
+Route::get("/admin/polls/{id}/add-question",
+           "App\Http\Controllers\PollController@getAddQuestion")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/admin/polls/{id}/add-question",
+           "App\Http\Controllers\PollController@postAddQuestion")
+        ->middleware("checkMemberLogin");
+
+
+
+Route::get("/admin/questions/edit/{id}",
+           "App\Http\Controllers\PollController@getEditQuestion")
+        ->middleware("checkMemberLogin");
+
+Route::post("/admin/questions/edit/{id}",
+           "App\Http\Controllers\PollController@postEditQuestion")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/admin/questions/delete/{id}",
+           "App\Http\Controllers\PollController@postDeleteQuestion")
+        ->middleware("checkMemberLogin");
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,10 @@
 @extends("admin/layout")
 
 
+@section("title")
+    <title>الأعضاء -  {{ config("app.name") }} </title>
+@endsection
+
 @section("content")
 
 

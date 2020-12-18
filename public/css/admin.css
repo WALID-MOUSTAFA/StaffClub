@@ -20,7 +20,17 @@ form input {
 }
 
 
-div.singleMember-wrapper .card {
+ .card {
     padding: 40px;
     
+} 
+
+ .content-wrapper {
+     padding: 30px;
+ }
+ 
+img.brand-image {
+    float:none !important;
+    display:block;
+    margin: auto !important;
 } 

@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+//TODO(walid): put(logout in the middleware to enable admin log out users);
+
 class CreateMembersTable extends Migration
 {
     public function up()
@@ -17,10 +19,11 @@ class CreateMembersTable extends Migration
             $table->string("phone");
             $table->double("age", 10)->nullable();
             $table->string("password", 1000)->nullable(); //TODO(walid): remove the nullable;
+            $table->boolean("logout")->default(false);
             $table->text("pic")->nullable();
         });
     }
-
+        
     public function down()
     {
         Schema::dropIfExists('members');
