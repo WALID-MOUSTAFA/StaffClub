@@ -10,6 +10,7 @@ class ProfileController extends Controller
         //TODO(walid): use bootstrap card pic instead of custom one;
         //TODO(walid): edit member data;
 
+
         
         public function getProfile ()
                 

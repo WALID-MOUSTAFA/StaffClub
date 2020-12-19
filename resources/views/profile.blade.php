@@ -58,6 +58,12 @@
 			 <button id="edit-member" class="mx-1 my-1 btn btn-warning">
 			     تعديل بياناتي
 			 </button>
+
+			 @if(isAnyPollsToVote())
+			 <a class=" my-1 mt-2 btn btn-warning slide-top" href="/polls">
+				 الاستبيانات
+			 </a>
+			 @endif
 			 
 			 <button id="add-relative" class="mx-1 my-1 btn btn-success">
 			     إضافة أفراد عائلة

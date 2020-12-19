@@ -11,6 +11,7 @@ class Poll extends Model
 
         protected string $title;
         protected string $desc;
+        protected  $active;
 
 
         public function questions() {

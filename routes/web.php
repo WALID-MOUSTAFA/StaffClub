@@ -45,9 +45,48 @@ Route::post("/delete-relative/{id}",
 
 
 
+Route::get("/polls/", "App\Http\Controllers\MemberPollController@index")
+        ->middleware("checkMemberLogin");
+
+
+Route::get("/polls/{id}", "App\Http\Controllers\MemberPollController@takePoll")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/polls/save-answers/", "App\Http\Controllers\MemberPollController@saveAnswers")
+        ->middleware("checkMemberLogin");
+
+
+
+
+
+
+
 //TODO(walid): change get to post in production;
 Route::get("/logout", "App\Http\Controllers\LoginController@logout")
         ->middleware("checkMemberLogin");
+
+
+Route::get("/admin/mods/login", "App\Http\Controllers\ModsController@getLogin")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/admin/mods", "App\Http\Controllers\ModsController@allMods")
+        ->middleware("checkMemberLogin");
+
+
+Route::get("/admin/mods/edit/{id}", "App\Http\Controllers\ModsController@getEditMod")
+        ->middleware("checkMemberLogin");
+
+Route::post("/admin/mods/edit/{id}", "App\Http\Controllers\ModsController@postEditMod")
+        ->middleware("checkMemberLogin");
+
+
+Route::post("/admin/mods/delete/{id}", "App\Http\Controllers\ModsController@postDeleteMod")
+        ->middleware("checkMemberLogin");
+
+
+
 
 Route::get("/admin", "App\Http\Controllers\AdminController@index")
         ->middleware("checkMemberLogin");

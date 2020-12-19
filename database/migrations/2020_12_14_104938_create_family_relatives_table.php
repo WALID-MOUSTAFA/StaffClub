@@ -24,7 +24,7 @@ class CreateFamilyRelativesTable extends Migration
             $table->unsignedBigInteger("member_id");
             $table->unsignedBigInteger("kinship_id");
             
-            $table->foreign("member_id")->references("id")->on("members");
+            $table->foreign("member_id")->references("id")->on("members")->onDelete("cascade");
             $table->foreign("kinship_id")->references("id")->on("kinships");
 
         });

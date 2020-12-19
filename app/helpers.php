@@ -1,5 +1,44 @@
 <?php
 
+
+
+
+function activePolls() {
+        $polls= \App\Models\Poll::where("active", "=", "1")->get();
+        return $polls;
+}
+
+
+function memberAllowedToVote($member, $poll) {
+        $poll_voter= \App\Models\PollVoters::where([["member_id", "=", $member->id], ["poll_id", "=", $poll->id]])->get();
+        if(count($poll_voter) > 0) {
+                return false;
+        }else {
+                return true;
+        } 
+} 
+
+
+function isAnyPollsToVote() {
+        $active_polls= activePolls();
+        if(count($active_polls) > 0) {
+                foreach($active_polls as $poll) {
+                        if(memberAllowedToVote(session()->get("user"), $poll)) {
+                                return true;
+                        } 
+                } 
+        }else {
+                return false;
+        } 
+
+        return false;
+} 
+
+
+
+
+
+
 function deletePicFromDisk($pic) {
         
 }
