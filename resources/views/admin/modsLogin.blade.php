@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>تسجيل الدخول -  {{ config("app.name") }} </title>
+	<title>تسجيل الدخول للمشرفين -  {{ config("app.name") }} </title>
 
 	
 	<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css">
@@ -123,13 +123,13 @@
 		
 		<div class="form-wrapper">
 
-	    	    <p class="h1">تسجيل الدخول </p>
+	    	    <p class="h1">تسجيل الدخول للمشرفين </p>
 
 		    <div class="errors">
 
-			@if(session()->has("errors"))
+			@if($errors->any())
 			    <div class="alert alert-danger">
-				@foreach($errors as $error)
+				@foreach($errors->all() as $error)
 				    <li>{{$error}}</li>
 				@endforeach
 			    </div>
@@ -137,20 +137,17 @@
 		    </div>
 
 		    
-	    <form method="post" action="">
+	    <form method="post" action="/admin/mods/login">
 		@csrf
 		
 		
 		<div class="input-wrapper">
-		    <input type="text" name="nat_id" class="form-control" id=""  placeholder="الرقم القومي" value="{{session()->has("old_nat")? session()->get("old_nat"):  ""}}">
+		    <input type="text" name="nat_id" class="form-control" id=""  placeholder="الرقم القومي" value="{{ old("nat_id") }}"}}">
 		</div>
 		
-		@if(session()->has("use_password"))
 		    <div class="input-wrapper">
 			<input type="password" name="password" class="form-control" id=""  placeholder="كلمة المرور">
 		    </div>
-		    
-		@endif
 
 		<button class="btn btn-primary login-btn">متابعة</button>
 		

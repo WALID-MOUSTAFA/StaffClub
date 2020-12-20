@@ -27,7 +27,7 @@ Route::get("/profile", "App\Http\Controllers\ProfileController@getProfile")
         ->middleware("checkMemberLogin");
 
 Route::post("/edit-member/{id}",
-            "App\Http\Controllers\MemberController@editMember" )
+            "App\Http\Controllers\AdminController@editMember" )
                 ->middleware("checkMemberLogin");
 
 
@@ -58,7 +58,7 @@ Route::post("/polls/save-answers/", "App\Http\Controllers\MemberPollController@s
 
 
 
-
+//////////////////////////////
 
 
 
@@ -67,12 +67,18 @@ Route::get("/logout", "App\Http\Controllers\LoginController@logout")
         ->middleware("checkMemberLogin");
 
 
-Route::get("/admin/mods/login", "App\Http\Controllers\ModsController@getLogin")
-        ->middleware("checkMemberLogin");
+Route::get("/admin/mods/login", "App\Http\Controllers\ModsController@getLogin");
+Route::post("/admin/mods/login", "App\Http\Controllers\ModsController@postLogin");
 
 
-Route::post("/admin/mods", "App\Http\Controllers\ModsController@allMods")
-        ->middleware("checkMemberLogin");
+//TODO(walid): add admin middleware;
+Route::get("/admin/mods", "App\Http\Controllers\ModsController@allMods");
+
+
+
+Route::get("/admin/mods/add-mod", "App\Http\Controllers\ModsController@getAddMod");
+Route::post("/admin/mods/add-mod", "App\Http\Controllers\ModsController@postAddMod");
+
 
 
 Route::get("/admin/mods/edit/{id}", "App\Http\Controllers\ModsController@getEditMod")
@@ -85,6 +91,12 @@ Route::post("/admin/mods/edit/{id}", "App\Http\Controllers\ModsController@postEd
 Route::post("/admin/mods/delete/{id}", "App\Http\Controllers\ModsController@postDeleteMod")
         ->middleware("checkMemberLogin");
 
+Route::get("/admin/mods/{id}/", "App\Http\Controllers\ModsController@viewSingleMod");
+
+
+
+
+///////////////////////////////////////
 
 
 
