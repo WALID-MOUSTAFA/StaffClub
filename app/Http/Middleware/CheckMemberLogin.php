@@ -22,7 +22,7 @@ class CheckMemberLogin
                     return redirect("/login");
             }
             
-            if(session()->get("login_role") == "member") {
+            if(!session()->get("login_role") == "member") {
                     session()->flush();
                     return redirect("/login");
             } 

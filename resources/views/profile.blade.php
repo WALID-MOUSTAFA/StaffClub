@@ -6,7 +6,7 @@
 	<title>الملف الشخصي -  {{ config("app.name") }} </title>
 
 	
-	<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ asset("css/bootstraprtl.min.css") }}">
 	<link href="{{asset("css/profile.css")}}" rel="stylesheet"/>
 	
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -513,9 +513,9 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.bundle.min.js" ></script>
-	<script src="{{ asset("/scripts/bootstrap-notify-3.1.3/dist/bootstrap-notify.min.js") }}"></script>
-	
+	<script src="{{ asset("scripts/bootstraprtl.bundle.min.js") }}" ></script>
+	<script src="{{ asset("scripts/jquery.min.js") }}" ></script>
+
 	<script>
 
 	 $(".edit-relative").on("click", function() {
@@ -541,26 +541,9 @@
 
 
 	{{-- handle if validation errors occured in edit member modal --}}
-	@if(session()->has("edit-member-errors"))
+	@if($errors->any())
 	    <script>
-	     $("#edit-member-modal").modal("toggle");
-	     var error_element= "<div class='alert alert-danger' >";
-	     error_element += "<ul>";
-
-	     @foreach(session()->get("edit-member-errors") as $error)
-	     error_element += "<li> " + "{{ $error }}" + "</li>";
-	     @endforeach
-
-	     error_element += "</ul>";
-	     error_element += "</div>";
-	     
-	     $("#edit-member-modal div.modal-errors").append(error_element);
-	    </script>
-	@endif
-
-	@if(session()->has("add-relative-errors"))
-	    <script>
-	     $("#add-relative-modal").modal("toggle");
+	     $(".edit-member-modal").modal("toggle");
 	     var error_element= "<div class='alert alert-danger' >";
 	     error_element += "<ul>";
 
@@ -571,7 +554,24 @@
 	     error_element += "</ul>";
 	     error_element += "</div>";
 	     
-	     $("#add-relative-modal div.modal-errors").append(error_element);
+	     $(".edit-member-modal div.modal-errors").append(error_element);
+	    </script>
+	@endif
+
+	@if($errors->any())
+	    <script>
+	     $(".add-relative-modal").modal("toggle");
+	     var error_element= "<div class='alert alert-danger' >";
+	     error_element += "<ul>";
+
+	     @foreach($errors->all() as $error)
+	     error_element += "<li> " + "{{ $error }}" + "</li>";
+	     @endforeach
+
+	     error_element += "</ul>";
+	     error_element += "</div>";
+	     
+	     $(".add-relative-modal div.modal-errors").append(error_element);
 	    </script>
 	@endif
 

@@ -66,9 +66,9 @@
 		</ul>
 
 		<!-- SEARCH FORM -->
-		<form class="form-inline ml-3" method="get" action="/admin/search">
+		<form class="header-search-form" method="get" action="/admin/search">
 		    <div class="input-group input-group-sm">
-			<input name="q" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+			<input name="q" class="form-control form-control-navbar" type="search" placeholder="ابحث عن عضو" aria-label="Search">
 			<div class="input-group-append">
 			    <button class="btn btn-navbar" type="submit">
 				<i class="fas fa-search"></i>

@@ -12,6 +12,15 @@ class FamilyRelativeController extends Controller
         public function addRelative()
         {
                 // dd(request()->all());
+
+                                
+                $requestData= request()->all();
+                if(request()->has("password")){
+                        $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                }
+                request()->replace($requestData);
+
+
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",

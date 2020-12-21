@@ -22,15 +22,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
-        Route::get("/login", "App\Http\Controllers\LoginController@getLogin");
+        Route::get("/login", "App\Http\Controllers\LoginController@getLogin")
+                ->withoutMiddleware([\App\Http\Middleware\LogUserOut::class]);
 
-        Route::post("/login", "App\Http\Controllers\LoginController@postLogin");
+
+        Route::post("/login", "App\Http\Controllers\LoginController@postLogin")
+                ->withoutMiddleware([\App\Http\Middleware\LogUserOut::class]);
+        
 
         Route::get("/profile", "App\Http\Controllers\ProfileController@getProfile")
                 ->middleware("checkMemberLogin");
 
         Route::post("/edit-member/{id}",
-                    "App\Http\Controllers\AdminController@editMember" )
+                    "App\Http\Controllers\ProfileController@editMember" )
                 ->middleware("checkMemberLogin");
 
 
@@ -121,12 +125,23 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
         Route::get("/admin/members", "App\Http\Controllers\AdminController@viewMembers")
                 ->middleware("checkIfMod");
 
+                Route::get("/admin/members/add", "App\Http\Controllers\AdminController@getAddMember")
+                ->middleware("checkIfMod");
+        
+        Route::post("/admin/members/add", "App\Http\Controllers\AdminController@postAddMember")
+                ->middleware("checkIfMod");
+
+
+        
         Route::get("/admin/members/{id}", "App\Http\Controllers\AdminController@viewSingleMember")
                 ->middleware("checkIfMod");
 
+
+        
         Route::get("/admin/members/edit/{id}", "App\Http\Controllers\AdminController@getEditSingleMember")
                 ->middleware("checkIfMod");
 
+        
 
         Route::post("/admin/members/edit/{id}", "App\Http\Controllers\AdminController@postEditSingleMember")
                 ->middleware("checkIfMod");
@@ -188,7 +203,7 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
                 ->middleware("checkIfMod");
 
         
-        Route::post("/admin/search", "App\Http\Controllers\SearchController@index")
+        Route::get("/admin/search", "App\Http\Controllers\SearchController@index")
                 ->middleware("checkIfMod");
 
 });

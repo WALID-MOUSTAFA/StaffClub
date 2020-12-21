@@ -34,3 +34,9 @@ img.brand-image {
     display:block;
     margin: auto !important;
 } 
+
+.header-search-form {
+    margin: auto;
+    width: 50%;
+    display: block;
+}  

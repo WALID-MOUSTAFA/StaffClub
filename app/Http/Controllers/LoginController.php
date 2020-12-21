@@ -21,11 +21,15 @@ class LoginController extends Controller
                 
                 $requestData= request()->all();
                 $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
-                $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
                 request()->replace($requestData);
 
 
                 $nat_id= request()->get("nat_id");
+                $password= request()->get("password");
+
                 $validation_errors = [];
                 
                 if($nat_id == null) {
@@ -43,15 +47,14 @@ class LoginController extends Controller
                 ])->with("relatives")->first();
 
 
-
                 if($member) {
-
                         $password = $member->password;
                         if($password == null) {
                                 $member->logout=0;
                                 $member->save();
                                 session()->put("user", $member);
-                                redirect("/profile");
+                                session()->put("login_role", "member");
+                                return redirect("/profile");
                                 
                                 
                         } else if ($password != null && request()->get("password") == null){ 
@@ -63,11 +66,13 @@ class LoginController extends Controller
 
                                 if($member-> password == request()->get("password")) {
                                         //TODO(walid): hash the password;
-                                         $member->logout=0;
-                                         $member->save();
-                                        session()->put("user", $member);
-                                        return redirect("/profile");
 
+                                        $member->logout=0;
+                                        $member->save();
+                                        session()->put("user", $member);
+                                        session()->put("login_role", "member");
+                                        return redirect("/profile");
+                                        
                                 } else {
                                         session()->flash("errors",  ["الرقم القومي أو كلمة المرور غير صحيحين"]);
                                         session()->flash("use_password",  true);
