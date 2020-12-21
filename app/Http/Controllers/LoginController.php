@@ -18,6 +18,13 @@ class LoginController extends Controller
 
 
         public function postLogin() {
+                
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                request()->replace($requestData);
+
+
                 $nat_id= request()->get("nat_id");
                 $validation_errors = [];
                 
@@ -41,6 +48,8 @@ class LoginController extends Controller
 
                         $password = $member->password;
                         if($password == null) {
+                                $member->logout=0;
+                                $member->save();
                                 session()->put("user", $member);
                                 redirect("/profile");
                                 
@@ -54,7 +63,8 @@ class LoginController extends Controller
 
                                 if($member-> password == request()->get("password")) {
                                         //TODO(walid): hash the password;
-                                        
+                                         $member->logout=0;
+                                         $member->save();
                                         session()->put("user", $member);
                                         return redirect("/profile");
 

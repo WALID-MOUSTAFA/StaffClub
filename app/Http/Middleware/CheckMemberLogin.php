@@ -18,8 +18,16 @@ class CheckMemberLogin
     {
             if(!session()->has("user"))
             {
+                    session()->flush();
                     return redirect("/login");
             }
+            
+            if(session()->get("login_role") == "member") {
+                    session()->flush();
+                    return redirect("/login");
+            } 
+            
+            
             return $next($request);
     }
 }

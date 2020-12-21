@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ModsController extends Controller
 {
+
+
         //TODO(walid): do delete;
 
         public function getLogin() {
@@ -14,8 +16,18 @@ class ModsController extends Controller
         } 
 
 
-        public function postLogin() {
+        public function postLogin(Request $request) {
                 //TODO(walid): validations;
+
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                request()->replace($requestData);
+                
+                
+
+                
+                
                 $validation = Validator::make(request()->all(),[
                         "nat_id"=> "required|digits:14",
                         "password"=> "required"
@@ -24,7 +36,8 @@ class ModsController extends Controller
                 if($validation->fails()) {
                         return back()->withErrors($validation)->withInput();
                 }
-                
+
+
                 $nat_id= request()->get("nat_id");
                 $password= request()->get("password");
 
@@ -33,11 +46,14 @@ class ModsController extends Controller
                         ["password", "=", $password]
                 ])->first();
 
-
+                
                 if($mod != null) {
+                        $mod->logout=0;
+                        $mod->save();
                         session()->put("user", $mod);
                         session()->put("login_role", "mod");
-                        return view("admin/index");
+                        // return view("admin/index");
+                        return redirect("/admin/");
                 }else {
                         $validation->getMessageBag()->add(
                                 "nat_id",
@@ -61,7 +77,7 @@ class ModsController extends Controller
         public function viewSingleMod($id){
                 $mod = \App\Models\Mod::find($id);
                 return view("admin/viewSingleMod")->with([
-                        "mod"=>$modx
+                        "mod"=>$mod
                 ]);                
                 
         } 
@@ -196,5 +212,13 @@ class ModsController extends Controller
                 }  
         }  
 
+
+
+        public function logout(){
+                session()->flush();
+                return redirect("/admin/mods/login");
+        }
+
+        
 }
 

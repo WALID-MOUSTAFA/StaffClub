@@ -7,15 +7,13 @@
 
 	
 	<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css">
-	<link href="{{asset("css/login.css")}}" rel="stylesheet"/>
+	<link href="{{asset("css/admin_login.css")}}" rel="stylesheet"/>
 	
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700&display=swap" rel="stylesheet"> 
     </head>
-
     <!-- viewBox="0 0 135.128 138.68401" -->
     <!-- viewBox="91 11 102 145" -->
-
 
     <body>
 
@@ -123,7 +121,7 @@
 		
 		<div class="form-wrapper">
 
-	    	    <p class="h1">تسجيل الدخول للمشرفين </p>
+	    	    <p class="h1 title">تسجيل الدخول للمشرفين </p>
 
 		    <div class="errors">
 

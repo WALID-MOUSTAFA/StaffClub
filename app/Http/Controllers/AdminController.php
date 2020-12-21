@@ -98,12 +98,14 @@ class AdminController extends Controller
                 $member->phone= $phone;
                 $member->gender= $gender;
                 
+                $member->logout= 1;
                 
                 if($member->save()) {
                         session()->flash("success", "تم التعديل بنجاح");
                         return redirect("/admin/members");
                 } //TODO(walid): handle errors;
 
+                
         }
 
 
