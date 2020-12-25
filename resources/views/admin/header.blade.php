@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="{{asset('css/adminlte3/plugins/summernote/summernote-bs4.css')}}">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700&display=swap" rel="stylesheet"> 
 
 	{{-- NOTE(walid): the condition statement maybe needed in bilingual; --}}
 	@if(true)
@@ -50,7 +51,7 @@
 
 
 	    <!-- Navbar -->
-	    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+	    <nav class="main-header navbar navbar-expand navbar-light color-black">
 		<!-- Left navbar links -->
 		<ul class="navbar-nav">
 		    <li class="nav-item">

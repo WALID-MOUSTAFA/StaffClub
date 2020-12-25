@@ -19,8 +19,8 @@ class CreatePollVotersTable extends Migration
             $table->unsignedBigInteger("member_id");
             $table->unsignedBigInteger("poll_id");
 
-            $table->foreign("member_id")->references("id")->on("members");
-            $table->foreign("poll_id")->references("id")->on("polls");
+            $table->foreign("member_id")->references("id")->on("members")->onDelete("cascade");
+            $table->foreign("poll_id")->references("id")->on("polls")->onDelete("cascade");
 
         });
     }

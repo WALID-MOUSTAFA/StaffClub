@@ -24,8 +24,19 @@
 		</tr>
 
 		<tr>
+		    <td>الرقم القومي</td>
+		    <td>{{ $member->nat_id }}</td>
+		</tr>
+
+		
+		<tr>
 		    <td>رقم الهاتف</td>
 		    <td>{{ $member->phone }}</td>
+		</tr>
+
+		<tr>
+		    <td>الصورة الشخصية</td>
+		    <td><img src="/uploads/{{ $member->pic }}"/></td>
 		</tr>
 
 		

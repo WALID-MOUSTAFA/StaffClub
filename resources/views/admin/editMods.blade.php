@@ -10,10 +10,14 @@
 
     <div class="card">
 
-	<div class="card-header">
-	    تعديل مشرف
-	</div>
-	
+	<div class="card">
+	    <div class="mb-4 text-center card-header bg-warning">
+		<p class="h3">
+		    تعديل مشرف
+		</p>
+	    </div>
+	    
+	    <div class="card-body">
 	@if($errors->any())
 	    <div class="alert alert-danger">
 		<ul>
@@ -24,7 +28,7 @@
 	    </div>
 	@endif
 	
-
+	
 	<form method="post" action="/admin/mods/edit/{{ $mod->id }}" enctype="multipart/form-data">
 	    @csrf
 	    <div class="input-wrapper">
@@ -45,7 +49,7 @@
 	    
 	    <div class="input-wrapper">
 		<label for="">كلمة السر</label>
-		<input class="form-control" name="password" type="text" value=""/>
+		<input class="form-control" name="password" type="password" value=""/>
 	    </div>
 	    
 	    
@@ -65,11 +69,12 @@
 		</div>
 	    </div>
 	    
-	    <button class="btn btn-success">إضافة</button>
+	    <button class="btn btn-warning btn-block">تعديل</button>
 
 	    
 	</form>
-	
+	    </div>    
+	    
     </div>
     
 @endsection

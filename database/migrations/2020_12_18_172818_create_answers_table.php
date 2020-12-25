@@ -21,9 +21,9 @@ class CreateAnswersTable extends Migration
             $table->unsignedBigInteger("option_id");
 
 
-            $table->foreign("member_id")->references("id")->on("members");
-            $table->foreign("question_id")->references("id")->on("questions");
-            $table->foreign("option_id")->references("id")->on("options");
+            $table->foreign("member_id")->references("id")->on("members")->onDelete("cascade");
+            $table->foreign("question_id")->references("id")->on("questions")->onDelete("cascade");
+            $table->foreign("option_id")->references("id")->on("options")->onDelete("cascade");
 
         });
     }

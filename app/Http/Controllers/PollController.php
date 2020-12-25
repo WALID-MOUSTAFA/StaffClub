@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 //TODO(walid): all checks and validations and error messages;
 
@@ -54,13 +55,42 @@ class PollController extends Controller
 
         
         public function getEditSinglePoll($id) {
-                return view("admin/editSinglePoll");
+                $poll = \App\Models\Poll::find($id);
+                return view("admin/editSinglePoll")->with([
+                        "poll"=>$poll
+                ]);
 
         }
 
 
         public function postEditSinglePoll($id) {
-                return view("admin/editSinglePoll");
+                // dd(request()->all());
+                $poll = \App\Models\Poll::find($id);
+                $validator= Validator::make(request()->all(), [
+                        "title" => "required",
+                        "desc" => "required",
+                ]);
+                if($validator->fails()) {
+                        return back()->withErrors($validator);
+
+                }
+
+                $poll->title= request()->get("title");
+                $poll->desc= request()->get("desc");
+                if(request()->has("active")){
+                        if(request()->get("active") == "on"){
+                                $poll->active = 1;
+                        }else if(request()->get("active") == "") {
+                                $poll->active = 0;
+                        } 
+                }else {
+                        $poll->active = 0;
+                }
+
+                if($poll->save()) {
+                        session()->flash("success", "تم تعديل الاستبيان");
+                        return redirect("/admin/polls");
+                } 
 
         }
 
@@ -149,8 +179,22 @@ class PollController extends Controller
                 return back();
         }
         
-        
 
+
+        //// reports /////
+        
+        public function singlePollReport($id) {
+                $poll = \App\Models\Poll::find($id);
+                $voters= \App\Models\PollVoters::where("poll_id","=",$id)->get();
+                $questions = $poll->questions()->get();
+                
+                
+                return view("admin/singlePollReport")->with([
+                        "poll"=>$poll,
+                        "qcount" => count($poll->questions()->get()),
+                        "num_of_voters" => count($voters),
+                ]);
+        }  
         
 
         

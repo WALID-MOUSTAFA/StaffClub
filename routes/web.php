@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 //TODO(walid): separate familyrelative into it's own controller;
 //TODO(walid): add logout=1 after major edit;
 
+Route::get("/", "\App\Http\Controllers\HomeController@index");
 
 Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
@@ -131,7 +132,10 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
         Route::post("/admin/members/add", "App\Http\Controllers\AdminController@postAddMember")
                 ->middleware("checkIfMod");
 
+        Route::post("/admin/members/delete/{id}", "App\Http\Controllers\AdminController@postDeleteMember")
+                ->middleware("checkIfMod");
 
+        
         
         Route::get("/admin/members/{id}", "App\Http\Controllers\AdminController@viewSingleMember")
                 ->middleware("checkIfMod");
@@ -200,6 +204,12 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
 
         Route::post("/admin/questions/delete/{id}", "App\Http\Controllers\PollController@postDeleteQuestion")
+                ->middleware("checkIfMod");
+
+
+
+        
+        Route::get("/admin/polls/report/{id}", "App\Http\Controllers\PollController@singlePollReport")
                 ->middleware("checkIfMod");
 
         

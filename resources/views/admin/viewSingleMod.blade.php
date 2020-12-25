@@ -11,33 +11,39 @@
 
     <div class="card">
 
-	<a class="btn btn-warning" href="/admin/mods/edit/{{$mod->id }}">
-	    تعديل
-	</a>
 	
-	<div class="card-header">
-	    عرض مشرف
+	<div class="card-header bg-primary text-center">
+	    <p class="h3">
+		عرض مشرف
+	    </p>
 	</div>
-
-	<table class="table">
-	    <tr>
-		<td>الاسم الكامل</td>
-		<td> {{ $mod->fullname }}</td>
-	    </tr>
-
-	    <tr>
-		<td>الرقم القومي</td>
-		<td>{{ $mod->nat_id }}</td>
-	    </tr>
-
-	    <tr>
-		<td>الصورة الشخصية</td>
-		<td><img alt="" src="/uploads/{{ $mod->pic }}"/></td>
-	    </tr>
-
-	    
-	</table>
 	
+	<div class="card-body clearfix">
+	    
+	    <a class="btn btn-warning float-left" href="/admin/mods/edit/{{$mod->id }}">
+		تعديل
+		<i class="fa fa-edit"></i>
+	    </a>
+	    
+	    <table class="table table-borderless">
+		<tr>
+		    <td>الاسم الكامل</td>
+		    <td> {{ $mod->fullname }}</td>
+		</tr>
+
+		<tr>
+		    <td>الرقم القومي</td>
+		    <td>{{ $mod->nat_id }}</td>
+		</tr>
+
+		<tr>
+		    <td>الصورة الشخصية</td>
+		    <td><img alt="" src="/uploads/{{ $mod->pic }}"/></td>
+		</tr>
+
+		
+	    </table>
+	</div>
 	
 	
     </div>

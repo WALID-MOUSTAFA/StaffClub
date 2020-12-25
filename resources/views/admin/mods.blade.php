@@ -8,17 +8,33 @@
 
 @section("content")
 
-    @if(session()->has("success"))
-	<div class="alet alert-success">
-	    session()->get("success");
-	</div>
-    @endif
     
     <div class="card">
+	<!-- <div class="mb-4 text-center card-header bg-primary">
+	     <p class="h3">
+	     تعديل بيانات العضو
+	     </p>
+	     </div>
+	-->
 
-	
-	<a href="/admin/mods/add-mod/" class="btn btn-primary">
+	<div class="card-body">
+
+	    @if(session()->has("success"))
+		<div class="alert alert-success alert-dismissible ">
+		    {{ session()->get("success") }}
+		</div>
+	    @endif
+
+	    
+	    @if(session()->has("error"))
+		<div class="alert alert-danger alert-dismissible ">
+		    {{ session()->get("error") }}
+		</div>
+	    @endif
+
+	    <a href="/admin/mods/add-mod/" class="btn btn-primary float-left">
 	    إضافة مشرف
+	    <i class="fa fa-plus"></i>
 	</a>
 
 	<table class="table">
@@ -34,16 +50,19 @@
 	    <tbody>
 		@foreach($mods as $mod)
 		    <tr>
-			<td>{{$mod->fullname }}</td>
+			<td> <a href="/admin/mods/{{ $mod->id}}">{{$mod->fullname }}</a></td>
 			<td>{{$mod->nat_id }}</td>
 
 			<td>
-			    <a class="btn btn-primary" href="/admin/mods/{{ $mod->id }}">عرض</a>
-			    <a class="btn btn-warning" href="/admin/mods/edit/{{ $mod->id }}">تعديل</a>
-			    <form method="post" class="inline-form" action="/admin/mods/delete/{{ $mod->id }}">
+			    <a class="btn btn-warning" href="/admin/mods/edit/{{ $mod->id }}">
+				تعديل
+				<i class="fa fa-edit"></i>
+			    </a>
+			    <form method="post" class="d-inline" action="/admin/mods/delete/{{ $mod->id }}">
 				@csrf
-				<button class="btn btn-danger">
+				<button class="submit-delete btn btn-danger">
 				    حذف
+				    <i class="fa fa-trash"></i>
 				</button>
 			    </form>
 			</td>
@@ -54,7 +73,7 @@
 	    </tbody>
 	    
 	</table>
-	
+	</div>
     </div>
     
 @endsection

@@ -128,10 +128,10 @@ class ModsController extends Controller
                 $mod->phone= request()->get("phone");
                 
                 if($mod->save()) {
-                        session()->flash("suscess", "تم إضافة المشرف بنجاح");
+                        session()->flash("success", "تم إضافة المشرف بنجاح");
                         return redirect("admin/mods");
                 }else {
-                        session()->flash("suscess", "حدث خطأ ما أثناء إضافة المشرف");
+                        session()->flash("success", "حدث خطأ ما أثناء إضافة المشرف");
                         return redirect("admin/mods");
 
                 }                 
@@ -189,10 +189,10 @@ class ModsController extends Controller
                 $mod->phone= request()->get("phone");
                 
                 if($mod->save()) {
-                        session()->flash("suscess", "تم تعديل المشرف بنجاح");
+                        session()->flash("success", "تم تعديل المشرف بنجاح");
                         return redirect("admin/mods");
                 }else {
-                        session()->flash("suscess", "حدث خطأ ما أثناء تعديل المشرف");
+                        session()->flash("success", "حدث خطأ ما أثناء تعديل المشرف");
                         return redirect("admin/mods");
 
                 }                 
@@ -203,10 +203,10 @@ class ModsController extends Controller
         public function postDeleteMod($id) {
                 $mod = \App\Models\Mod::find($id);
                 if($mod->delete()) {
-                        session()->flash("suscess", "تم حذف المشرف بنجاح");
+                        session()->flash("success", "تم حذف المشرف بنجاح");
                         return redirect("admin/mods");
                 }else {
-                        session()->flash("suscess", "حدث خطأ ما أثناء حذف المشرف");
+                        session()->flash("success", "حدث خطأ ما أثناء حذف المشرف");
                         return redirect("admin/mods");
 
                 }  

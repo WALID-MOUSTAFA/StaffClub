@@ -46,6 +46,8 @@ class FamilyRelativeController extends Controller
                         $pic=request()->file("pic");
                         $validator = Validator::make(request()->all(), ["pic"=> "between:0,2048|mimes:jpeg,png,svg,gif"]);
                         if($validator->fails()) {
+                                session()->flash("add-relative-errors");
+
                                 return redirect("/profile") ->withErrors($validator)
                                                             ->withInput();
                         }
@@ -71,7 +73,7 @@ class FamilyRelativeController extends Controller
                 }
                 
                 if($relative->save()) {
-                        session()->flash("add-relative-success", "تم الإضافة بنجاح");
+                        session()->flash("success", "تم الإضافة بنجاح");
                         return back();
                 }
                 
@@ -114,6 +116,7 @@ class FamilyRelativeController extends Controller
                         $pic=request()->file("pic");
                         $validator = Validator::make(request()->all(), ["pic"=> "between:0,2048|mimes:jpeg,png,svg,gif"]);
                         if($validator->fails()) {
+                                session()->flash("edit-relative-errors");
                                 return redirect("/profile") ->withErrors($validator)
                                                             ->withInput();
                         }

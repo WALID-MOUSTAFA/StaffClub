@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-light-navy elevation-4">
+<aside class="main-sidebar sidebar-dark-primary bg-black   elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
 
@@ -13,12 +13,14 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
+        
+          <div class="info">
+              <a href="#" class="d-block"> {{ session()->get("user")->fullname }}</a>
+          </div>
+	  <br/>
+	  <div class="image">
               <img src="/uploads/{{ session()->get("user")->pic }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"> {{ session()->get("user")->fullname }}</a>
-        </div>
+          </div>
       </div>
 
       <!-- Sidebar Menu -->
@@ -28,34 +30,35 @@
 		   with font-awesome or any other icon font library -->
 
 	      <li class="nav-item has-treeview ">
-		  <a href="/admin/mods" class="nav-link ">
+		  <a href="/admin/mods" class="nav-link  {{ request()->is('admin/mods*') ? 'active' : '' }} ">
 		      <i class="nav-icon fas fa-tachometer-alt"></i>
 		      <p>
 			  المشرفين
-			  <!-- <i class="right fas fa-angle-left"></i> -->
+			  <i class="right fas fa-angle-left"></i>
 		      </p>
 		  </a>
 	      </li>
 
 	      
 	    
-	    <li class="nav-item has-treeview ">
-		<a href="/admin/members" class="nav-link ">
+	    <li class="nav-item has-treeview">
+		<a href="/admin/members" class="nav-link 
+			 {{ request()->is('admin/members*') ? 'active' : '' }}">
 		    <i class="nav-icon fas fa-tachometer-alt"></i>
 		    <p>
 			الأعضاء
-			<!-- <i class="right fas fa-angle-left"></i> -->
+			<i class="right fas fa-angle-left"></i>
 		    </p>
 		</a>
 	    </li>
 
 
 	    <li class="nav-item has-treeview ">
-		<a href="/admin/polls" class="nav-link ">
+		<a href="/admin/polls" class="nav-link {{ request()->is('admin/polls*') ? 'active' : '' }}">
 		    <i class="nav-icon fas fa-tachometer-alt"></i>
 		    <p>
 			الاستبيانات
-			<!-- <i class="right fas fa-angle-left"></i> -->
+			<i class="right fas fa-angle-left"></i>
 		    </p>
 		</a>
 		<!-- <ul class="nav nav-treeview">

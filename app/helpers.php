@@ -48,36 +48,25 @@ function fromEasternArabicToWestern($str) {
 
 
 function deletePicFromDisk($pic) {
-        
+        if($pic == "default.jpg") {
+                return false;
+        } 
+        $file = storage_path()."/app/uploads/" . $pic;
+        if (file_exists($file)) {
+                if (File::delete($file)) {
+                        return true;
+                }
+        }
 }
 
 
 
-//     public function deleteImage($image_id = null){
 
-//         if ($image_id != null) {
-//             $file = \App\ProjectImage::where("uri",$image_id)->first();
-//             if ($file != null) {
-//                 $file->delete();
-//             }
-                  
-//         }
-        
-//         $file = storage_path()."/app/uploads/" . $image_id;
-//         if (file_exists($file)) {
-//             if (File::delete($file)) {
-//                 return response()->json([
-//                     "status"=> "success",
-//                     "message"=> "the file $image_id deleted successfully"
-//                 ])->setStatusCode(200);
-//             }
-//         }else{
-//             return response()->json([
-//                 "status" => "error",
-//                 "message" => "No such file found!"
-//             ])->setStatusCode(404);
-//         }
-//     }
-// }
-
-?>
+function getTitleSlug($title, $required_slug) {
+        $slug = explode("-", $title)[0];
+        if($slug == $required_slug) {
+                return "active";
+        }else {
+                return "";
+        } 
+}

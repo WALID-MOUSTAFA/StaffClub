@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>تسجيل الدخول -  {{ config("app.name") }} </title>
 
-	
-	<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ asset("/css/bootstraprtl.min.css") }}">
+
 	<link href="{{asset("css/login.css")}}" rel="stylesheet"/>
 	
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -155,16 +155,16 @@
 		<button class="btn btn-primary login-btn">متابعة</button>
 		
 	    </form>
-	</div>
+		</div>
 	    </div>
 
 	    
-	    </div>
-	    
+	</div>
+	
 
 	
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.bundle.min.js" ></script>
+	<script src="{{ asset("scripts/jquery.min.js") }}" ></script>
+	<script src="{{ asset("scripts/bootstraprtl.bundle.min.js") }}" ></script>
 
     </body>
 </html>

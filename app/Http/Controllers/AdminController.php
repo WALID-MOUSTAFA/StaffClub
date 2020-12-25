@@ -43,13 +43,49 @@ class AdminController extends Controller
         public function postEditSingleMember($id) {
                 //TODO(walid): add validation;
                 //TODO(walid): prevent member from editing another member except super_admin;
-
+                
                 $member= \App\Models\Member::find($id);
+
+                $validator= Validator::make(request()->all(), [
+                        "fullname"=> "required",
+                        "nat_id"=>"required:digits:14",
+                        "phone"=>"required",
+                        // "password"=> "required",
+                        // "kinship"=>"required",
+                        "gender"=> "required",
+                        "faculty"=> "required",
+                ]);
+
+                
+                
+                if($validator->fails()) {
+                        session()->flash("edit-member-errors", ""    );
+                        return back() ->withErrors($validator)
+                                      ->withInput();
+                }
+
+
+                if(request()->hasFile("pic") && request()->file("pic") != null) {
+                        $pic= "";
+                        $pic=request()->file("pic");
+                        $validator = Validator::make(request()->all(), ["pic"=> "between:0,2048|mimes:jpeg,png,svg,gif"]);
+                        if($validator->fails()) {
+                                return redirect("/profile") ->withErrors($validator)
+                                                            ->withInput();
+                        }
+
+                        $name= $pic->store("uploads");
+                        $name=substr($name, strlen("uploads/"));
+                        $pic=$name;
+                        $member->pic= $pic;
+
+                }
 
                        
                 $fullname= request()->get("fullname");
                 $phone = request()->get("phone");
                 $gender = request()->get("gender");
+                $faculty = \App\Models\Faculty::find(request()->get("faculty"));
 
                 if(request()->has("nat_id") ) {
                         $member->nat_id= request()->get("nat_id");
@@ -57,7 +93,7 @@ class AdminController extends Controller
                 }
                 
                 
-                if(request()->has("password")) {
+                if(request()->has("password") && request()->get("password") != null ) {
                         $member->password= request()->get("password");
                 } 
                 
@@ -65,6 +101,7 @@ class AdminController extends Controller
                 $member->fullname= $fullname;
                 $member->phone= $phone;
                 $member->gender= $gender;
+                $member->faculty()->associate($faculty);
                 
                 $member->logout= 1;
                 
@@ -95,6 +132,7 @@ class AdminController extends Controller
                         "password"=> "required",
                         // "kinship"=>"required",
                         "gender"=> "required",
+                        "faculty"=>"required",
                 ]);
 
                 
@@ -131,7 +169,8 @@ class AdminController extends Controller
                 $member->password= request()->get("password");
                 $member->phone = request()->get("phone");
                 $member->gender = request()->get("gender");
-
+                $member->faculty()->associate(\App\Models\Faculty::find(request()->get("faculty")));
+                
                 if(request()->hasFile("pic") && request()->file("pic") != null) {
                         $pic= "";
                         $pic=request()->file("pic");
@@ -160,10 +199,26 @@ class AdminController extends Controller
         
 
         public function editRelative($id) {
-                
+                //TODO(walid): so if it will ever be needed;
         }
         
-        //TODO(walid): delete member;
+
+
+        public function postDeleteMember($id) {
+                $member = \App\Models\Member::find($id);
+                $pic = $member->pic;
+                if($member->delete()) {
+                        if($pic != null) {
+                                deletePicFromDisk($pic);
+                        }
+
+                        session()->flash("success", "تم حذف العضو بنجاح");
+                        return redirect("/admin/members");
+                } else {
+                        session()->flash("error", "حدثت مشكلة أثناء محاولة حذف العضو");
+                        return redirect("/admin/members");
+                } 
+        } 
         
         
 }

@@ -25,6 +25,10 @@ class MemberPollController extends Controller
                 $answers=[];
                 $member= session()->get("user");
                 $poll= \App\Models\Poll::find(request()->get("poll_id"));
+
+                if(memberAllowedToVote($member, $poll) == false) {
+                        return "error, you can't take the poll twice";
+                }
                 
                 foreach(request()->get("answers") as $question => $answer) {
                         $a= new \App\Models\Answer();

@@ -1,3 +1,16 @@
+body{
+    font-family: 'Almarai'  !important;
+}
+
+img {
+    max-width: 100%;
+} 
+
+.h3{
+    font-family: 'Almarai'  !important;
+}
+
+
 div.content-wrapper, .main-header {
     margin-left: 0 !important;
 }
@@ -20,7 +33,7 @@ form input {
 }
 
 
- .card {
+ .card-body {
     padding: 40px;
     
 } 
@@ -40,3 +53,12 @@ img.brand-image {
     width: 50%;
     display: block;
 }  
+
+
+.custom-switch {
+    direction: ltr;
+} 
+
+.brand-text {
+    font-size: smaller;
+} 

@@ -4,13 +4,16 @@
         <meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>الملف الشخصي -  {{ config("app.name") }} </title>
+	<link rel="stylesheet" href="{{ asset('css/adminlte3/plugins/fontawesome-free/css/all.min.css')}}">
 
 	
-	<link rel="stylesheet" href="{{ asset("css/bootstraprtl.min.css") }}">
-	<link href="{{asset("css/profile.css")}}" rel="stylesheet"/>
+	<link rel="stylesheet" href="{{ asset("/css/bootstraprtl.min.css") }}">
+	<link href="{{asset("/css/profile.css")}}" rel="stylesheet"/>
 	
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700&display=swap" rel="stylesheet"> 
+
+	
     </head>
 
     <!-- TODO(walid): add font awesome -->
@@ -21,43 +24,14 @@
 	<div class="content-wrapper profile-wrapper">
 
 	    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">نادي أعضاء هيئة التدريس</a>
-
+		<a class="navbar-brand" href="/profile">الملف الشخصي - نادي أعضاء هيئة التدريس</a>
 		
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav ml-auto">
 
-		
-		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		     <span class="navbar-toggler-icon"></span>
-		     </button>
-
-		     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		     <ul class="navbar-nav mr-auto">
-		     <li class="nav-item active">
-		     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		     </li>
-		     <li class="nav-item">
-		     <a class="nav-link" href="#">Link</a>
-		     </li>
-		     <li class="nav-item dropdown">
-		     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		     Dropdown
-		     </a>
-		     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		     <a class="dropdown-item" href="#">Action</a>
-		     <a class="dropdown-item" href="#">Another action</a>
-		     <div class="dropdown-divider"></div>
-		     <a class="dropdown-item" href="#">Something else here</a>
-		     </div>
-		     </li>
-		     <li class="nav-item">
-		     <a class="nav-link disabled" href="#">Disabled</a>
-		     </li>
-		     </ul> -->
-		     <ul class="navbar-nav ml-auto">
-
-			 <button id="edit-member" class="mx-1 my-1 btn btn-warning">
-			     تعديل بياناتي
-			 </button>
 
 			 @if(isAnyPollsToVote())
 			 <a class=" my-1 mt-2 btn btn-warning slide-top" href="/polls">
@@ -65,14 +39,14 @@
 			 </a>
 			 @endif
 			 
-			 <button id="add-relative" class="mx-1 my-1 btn btn-success">
-			     إضافة أفراد عائلة
-			 </button>
+			 <a class="btn btn-danger" href="/logout">
+			     تسجيل الخروج
+			     <i class="fa fa-arrow-left"></i>
+			 </a>
+		    </ul>
+		</div>
 
-		     </ul>
-		     
-
-		     </nav>
+	    </nav>
 	    
 	    <div class="container">
 
@@ -87,15 +61,7 @@
 
 			<div class="side-info">
 
-			    <table class="table side-info-table">
-				<tbody>
-				    <tr>
-					<td class="td-key">المهنة</td>
-					<td class="td-value">مدرس مساعد بكلية العلوم</td>
-				    </tr>
-				</tbody>
-			    </table>
-			    
+			   			    
 			</div>
 			
 			
@@ -104,20 +70,37 @@
 
 		    
 		    <div class="wide-section col-sm-8">
-			<div>
+			<div class="row justify-content-between">
 			    <p class="h3">
 				{{$user->fullname}}
 			    </p>
+			    <button id="edit-member" class="mx-1 my-1 btn btn-warning">
+				تعديل بياناتي
+				<i class="fa fa-edit"></i>
+			    </button>
 
 			</div>
 			
+			
+			@if(session()->has("success"))
+			    <div class="alert alert-success alert-dismissible ">
+				{{ session()->get("success") }}
+			    </div>
+			@endif
+
+			
+			@if(session()->has("error"))
+			    <div class="alert alert-danger alert-dismissible ">
+				{{ session()->get("error") }}
+			    </div>
+			@endif
 
 			
 
 			<div class="contact-info">
 
 			    <p class="other-color">
-				معلومات الاتصال
+				معلومات عامة
 			    </p>
 			    
 			    <table class="table contact-info-table">
@@ -127,12 +110,29 @@
 					<td class="td-key">رقم الهاتف</td>
 					<td>{{ $user->phone }}</td>
 				    </tr>
-
-
+				    
+				    
+				    @if($user->email)
 				    <tr>
 					<td class="td-key">البريد الإلكتروني</td>
 					<td>{{ $user->email }}</td>
 				    </tr>
+				    @endif
+
+				    <tr>
+					<td class="td-key">الكلية</td>
+					<td>{{ $user->faculty()->first()->name }}</td>
+				    </tr>
+
+				    
+				    @if($user->designation)
+					<tr>
+					    <td class="td-key">المسمى الوظيفي</td>
+					    <td>{{ $user->email }}</td>
+					</tr>
+				    @endif
+
+				    
 
 				    
 				    <tr>
@@ -149,11 +149,19 @@
 
 
 			<div class="relatives">
-
+			    <div class="row justify-content-between">
+				
 			    <p class="other-color">
 				الأقارب والعائلة
 			    </p>
 
+			    <button id="add-relative" class="mx-1 my-1 btn btn-success">
+				إضافة أفراد عائلة
+				<i class="fa fa-plus"></i>
+			    </button>
+			    </div>
+
+			    
 			    
 			    @if(!$user->relatives()->get())
 				لا يوجد
@@ -175,6 +183,7 @@
 								<span aria-hidden="true">&times;</span>
 							    </button>
 							</div>
+							<div class="modal-errors"></div>
 
 							<div class="modal-body">
 							    <form method="post" id="edit-relative-form"
@@ -380,7 +389,7 @@
 	    <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		    <div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
+			<h5 class="modal-title">إضافة أفراد العائلة</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			</button>
@@ -443,8 +452,8 @@
 		    </div>
 
 		    <div class="modal-footer">
-			<button type="submit" form="add-relative-form"  class="btn btn-success">إضافة</button>
-			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+			<button type="submit" form="add-relative-form"  class="btn btn-success">إضافة <i class="fa fa-plus"></i></button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء <i class="fa fa-times"></i></button>
 		    </div>
 		</div>
 	    </div>
@@ -456,7 +465,7 @@
 	    <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		    <div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
+			<h5 class="modal-title">تعديل بياناتي</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			</button>
@@ -478,7 +487,23 @@
 				<label for="">رقم الهاتف</label>
 				<input type="text" name="phone" class="form-control" id=""  value="{{ $user->phone }}" placeholder="رقم الهاتف" />
 			    </div>
-			    
+
+			    <div class="input-wrapper">
+				<label for="">كلمة المرور</label>
+				<input type="password" name="password" class="form-control" id=""  value="" placeholder="" />
+			    </div>
+
+			    <div class="input-wrapper">
+				<label for="">الكلية</label>
+				<select name="faculty" class="form-control custom-select">
+				    @foreach(\App\Models\Faculty::all() as $fac)
+					<option value="{{$fac->id }}" {{$user->faculty()->first()->id == $fac->id ? "selected" : "" }}>
+					    {{$fac->name}}
+					</option>
+				    @endforeach
+				</select>
+			    </div>
+
 			    
 			    <div class="input-wrapper">
 				<label for="">الجنس</label>
@@ -498,8 +523,11 @@
 		    </div>
 
 		    <div class="modal-footer">
-			<button type="submit" form="edit-member-form" type="button" class="btn btn-success">إضافة</button>
-			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+			<button type="submit" form="edit-member-form" type="button" class="btn btn-warning">
+			    تعديل
+			    <i class="fa fa-edit"></i>
+			</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء <i class="fa fa-times"></i></button>
 		    </div>
 		</div>
 	    </div>
@@ -513,8 +541,8 @@
 	
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="{{ asset("scripts/bootstraprtl.bundle.min.js") }}" ></script>
 	<script src="{{ asset("scripts/jquery.min.js") }}" ></script>
+	<script src="{{ asset("scripts/bootstraprtl.bundle.min.js") }}" ></script>
 
 	<script>
 
@@ -541,7 +569,7 @@
 
 
 	{{-- handle if validation errors occured in edit member modal --}}
-	@if($errors->any())
+	@if($errors->any()  && session()->has("edit-member-errors"))
 	    <script>
 	     $(".edit-member-modal").modal("toggle");
 	     var error_element= "<div class='alert alert-danger' >";
@@ -558,7 +586,7 @@
 	    </script>
 	@endif
 
-	@if($errors->any())
+	@if($errors->any() && session()->has("add-relative-errors"))
 	    <script>
 	     $(".add-relative-modal").modal("toggle");
 	     var error_element= "<div class='alert alert-danger' >";
@@ -572,6 +600,23 @@
 	     error_element += "</div>";
 	     
 	     $(".add-relative-modal div.modal-errors").append(error_element);
+	    </script>
+	@endif
+
+	@if($errors->any() && session()->has("edit-relative-errors"))
+	    <script>
+	     $(".edit-relative-modal").modal("toggle");
+	     var error_element= "<div class='alert alert-danger' >";
+	     error_element += "<ul>";
+
+	     @foreach($errors->all() as $error)
+	     error_element += "<li> " + "{{ $error }}" + "</li>";
+	     @endforeach
+
+	     error_element += "</ul>";
+	     error_element += "</div>";
+	     
+	     $(".edit-relative-modal div.modal-errors").append(error_element);
 	    </script>
 	@endif
 

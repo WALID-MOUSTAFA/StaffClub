@@ -10,10 +10,14 @@
 
     <div class="card">
 
-	<div class="card-header">
-	    إضافة مشرف
+	<div class="card-header bg-success text-center">
+	    <p class="h3">	
+		إضافة مشرف
+	    </p>
 	</div>
+
 	
+	<div class="card-body">
 	@if($errors->any())
 	    <div class="alert alert-danger">
 		<ul>
@@ -45,7 +49,7 @@
 	    
 	    <div class="input-wrapper">
 		<label for="">كلمة السر</label>
-		<input class="form-control" name="password" type="text" value=""/>
+		<input class="form-control" name="password" type="password" value=""/>
 	    </div>
 	    
 	    
@@ -66,11 +70,11 @@
 		</div>
 	    </div>
 	    
-	    <button class="btn btn-success">إضافة</button>
+	    <button class="btn btn-success btn-block">إضافة</button>
 
 	    
 	</form>
-	
+	</div>
     </div>
     
 @endsection
