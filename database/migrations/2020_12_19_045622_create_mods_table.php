@@ -24,7 +24,7 @@ class CreateModsTable extends Migration
             $table->double("age", 10)->nullable();
             $table->string("password", 1000); //TODO(walid): remove the nullable;
             $table->boolean("logout")->default(false);
-            $table->text("pic")->nullable();
+            $table->string("pic")->nullable()->default("default.jpg");
         });
     }
 

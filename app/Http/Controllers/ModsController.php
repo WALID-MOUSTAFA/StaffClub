@@ -91,11 +91,19 @@ class ModsController extends Controller
         
         public function postAddMod() {
                 $mod= new \App\Models\Mod();
-                                
+
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
+                request()->replace($requestData);
+
+                
                 //TODO(walid): validators;
                 $validator = Validator::make(request()->all(),[
                         "fullname" => "required:digits",
-                        "nat_id"=> "required|digits:14",
+                        "nat_id"=> "required|digits:14|unique:mods",
                         "password"=> "required",
                         "gender" => "required"
                 ]);
@@ -150,10 +158,18 @@ class ModsController extends Controller
         public function postEditMod($id) {
                 $mod = \App\Models\Mod::find($id);
 
-                                //TODO(walid): validators;
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
+                request()->replace($requestData);
+
+                
+                //TODO(walid): validators;
                 $validator = Validator::make(request()->all(),[
                         "fullname" => "required:digits",
-                        "nat_id"=> "required|digits:14",
+                        "nat_id"=> "required|digits:14|unique:mods,nat_id,".$mod->id,
                         // "password"=> "required",
                         "gender" => "required"
                 ]);

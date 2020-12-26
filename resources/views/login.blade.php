@@ -97,8 +97,8 @@
 	    </metadata>
 	    <g
 		inkscape:label="Layer 1"
-		inkscape:groupmode="layer"
-		id="layer1">
+				inkscape:groupmode="layer"
+				id="layer1">
 		<ellipse
 		    style="fill:url(#linearGradient72);fill-opacity:1;fill-rule:evenodd;stroke-width:0.281051"
 		    id="path10"
@@ -116,9 +116,33 @@
 	    </g>
 	</svg>
 
+
+	<nav class="navbar navbar-expand-lg navbar-light ">
+	    <a class="navbar-brand" href="/profile">نادي أعضاء هيئة التدريس</a>
+	    
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto ml-auto">
+		    <li class="nav-item">
+			<a class="nav-link" href="/">الرئيسية</a>
+		    </li>
+		    <li class="nav-item">
+			<a class="nav-link" href="/admin">لوحة التحكم</a>
+
+		    </li>
+		</ul>
+		
+	    </div>
+
+	</nav>
+
 	
 	<div class="container">
 
+	    
+	    
 	    <div class="login-wrapper content-wrapper">
 		
 		<div class="form-wrapper">

@@ -15,7 +15,7 @@ class FamilyRelativeController extends Controller
 
                                 
                 $requestData= request()->all();
-                if(request()->has("password")){
+                if(request()->has("nat_id")){
                         $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
                 }
                 request()->replace($requestData);
@@ -24,7 +24,7 @@ class FamilyRelativeController extends Controller
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=> "required|digits:14",
+                        "nat_id"=> "required|digits:14|unique:family_relatives",
                         "kinship"=>"required"
                 ]);
 
@@ -87,11 +87,12 @@ class FamilyRelativeController extends Controller
                 // dd(request()->all());
                 //TODO(walid): make validator;
 
-                
+                $relative= \App\Models\FamilyRelative::find($relativeId);
+
                                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=> "required|digits:14",
+                        "nat_id"=> "required|digits:14|unique:family_relatives,nat_id,".$relative->id,
                         "kinship"=>"required"
                 ]);
 
@@ -101,7 +102,6 @@ class FamilyRelativeController extends Controller
                         ->withInput();
                 } 
 
-                $relative= \App\Models\FamilyRelative::find($relativeId);
 
                 
                 $fullname= request()->get("fullname");

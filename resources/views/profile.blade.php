@@ -403,10 +403,12 @@
 			    
 			    
 			    <div class="input-wrapper">
+				<label for="">الاسم الكامل</label>
 				<input type="text" name="fullname" class="form-control" id=""  placeholder="الاسم الكامل" />
 			    </div>
 
 			    <div class="input-wrapper">
+				<label for="">الرقم القومي</label>
 				<input type="text" name="nat_id" class="form-control" id=""  placeholder="الرقم القومي" />
 			    </div>
 
@@ -418,7 +420,7 @@
 				 </select>
 				 </div>
 			    -->
-			    
+			    <label for="">صلة القرابة</label>
 			    <div class="input-wrapper">
 				<select name="kinship" class="custom-select">
 				    @foreach($kinships as $kinship)

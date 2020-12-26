@@ -60,3 +60,6 @@ scale: 1.7;
 
 }
 
+nav, nav * {
+    background-color: rgba(248, 249, 250, .4)
+} 

@@ -41,14 +41,20 @@ class AdminController extends Controller
 
         
         public function postEditSingleMember($id) {
-                //TODO(walid): add validation;
-                //TODO(walid): prevent member from editing another member except super_admin;
+
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
+                request()->replace($requestData);
+
                 
                 $member= \App\Models\Member::find($id);
 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=>"required:digits:14",
+                        "nat_id"=>"required|digits:14|unique:members,nat_id,".$member->id,
                         "phone"=>"required",
                         // "password"=> "required",
                         // "kinship"=>"required",
@@ -124,10 +130,18 @@ class AdminController extends Controller
         //TODO(walid): it's too late, finish the validator later;
         public function postAddMember()
         {
+                                
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
+                request()->replace($requestData);
+
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=>"required:digits:14",
+                        "nat_id"=>"required|digits:14|unique:members",
                         "phone"=>"required",
                         "password"=> "required",
                         // "kinship"=>"required",
