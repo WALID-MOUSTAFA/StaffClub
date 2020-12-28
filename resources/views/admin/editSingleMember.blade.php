@@ -34,6 +34,19 @@
 
 	<div class="card-body">
 
+	    <div class="my-4 float-left ">
+		<form class="d-inline " method="post" action="/admin/members/delete/{{$member->id }}">
+		    @csrf
+		    <button type="submit" class="submit-delete btn btn-danger">
+			حذف
+			<i class="fa fa-trash"></i>
+		    </button>
+		</form>
+
+	    </div>
+
+	    <div class="clearfix"></div>
+
 	    
 	    <form id="edit-member-form" class="edit-member-form" method="post" action="/admin/members/edit/{{ $member->id }}">
 		@csrf
@@ -67,6 +80,14 @@
 			<option value="female"  {{ $member->gender=="female"? "selected" : "" }} >أنثى</option>
 		    </select>
 		</div>
+
+		
+		<div class="input-wrapper">
+		    <label for="">المسمى الوظيفي</label>
+		    <input class="form-control" name="designation" type="text" value="{{$member->designation }}"/>
+
+		</div>
+
 
 		
 		<div class="input-wrapper">

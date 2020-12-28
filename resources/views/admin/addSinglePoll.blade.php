@@ -18,6 +18,18 @@
 	    
 	    <div class="card-body">
 
+		@if($errors->any())
+		    <div class="alert alert-danger">
+			<ul>
+			    @foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			    @endforeach
+			</ul>
+		    </div>
+		@endif
+		
+
+		
 		<form  method="post" action="/admin/polls/add">
 		    @csrf
 		    <div class="input-wrapper">
@@ -28,7 +40,7 @@
 		    <div class="input-wrapper">
 			<label for="">الوصف</label>
 
-			<textarea cols="30" id="" name="desc" rows="10"></textarea>
+			<textarea class="form-control" cols="30" id="" name="desc" rows="10"></textarea>
 		    </div>
 
 		    <button class="btn btn-success btn-block">إضافة

@@ -21,7 +21,7 @@ class CreateMembersTable extends Migration
                         $table->string("password", 1000)->nullable(); //TODO(walid): remove the nullable;
                         $table->boolean("logout")->default(false);
                         $table->string("pic")->nullable()->default("default.jpg");
-                        
+                        $table->string("designation")->nullable();
                         $table->unsignedBigInteger("faculty_id")->nullable();
                         $table->foreign("faculty_id")->references("id")->on("faculties")->onDelete("set null");
                 });

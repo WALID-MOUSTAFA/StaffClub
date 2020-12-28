@@ -57,18 +57,23 @@
 			</td>
 			<td>
 			    <div>
-				<a href="/admin/polls/edit/{{ $poll->id }}"><button class="btn btn-warning">تعديل</button></a>
+				<a class="btn btn-warning" href="/admin/polls/edit/{{ $poll->id }}">تعديل
+				    <i class="fa fa-edit"></i>
+				</a>
 				
 				
 				<form method="post" class="delete-poll-form d-inline" action="/admin/polls/delete/{{ $poll->id }}">
 				    @csrf
 				    <button class="submit-delete btn btn-danger">
 					حذف
+					<i class="fa fa-trash"></i>
 				    </button>
 				</form>
 
 				@if(count(\App\Models\PollVoters::where("poll_id", "=", $poll->id)->get()) > 0)
-				    <a href="/admin/polls/report/{{$poll->id}}" class="btn btn-primary">عرض النتائج</a>
+				    <a href="/admin/polls/report/{{$poll->id}}" class="btn btn-primary">عرض النتائج
+					<i class="fa fa-external-link-alt"></i>
+				    </a>
 				@endif
 			    </div>
 			</td>

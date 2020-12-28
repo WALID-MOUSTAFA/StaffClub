@@ -91,6 +91,10 @@ class AdminController extends Controller
                 $fullname= request()->get("fullname");
                 $phone = request()->get("phone");
                 $gender = request()->get("gender");
+                if(request()->get("designation") != null) {
+                        $member->designation = request()->get("designation");
+                }
+
                 $faculty = \App\Models\Faculty::find(request()->get("faculty"));
 
                 if(request()->has("nat_id") ) {
@@ -183,7 +187,11 @@ class AdminController extends Controller
                 $member->password= request()->get("password");
                 $member->phone = request()->get("phone");
                 $member->gender = request()->get("gender");
+                if(request()->get("designation") != null) {
+                        $member->designation = request()->get("designation");
+                }
                 $member->faculty()->associate(\App\Models\Faculty::find(request()->get("faculty")));
+                
                 
                 if(request()->hasFile("pic") && request()->file("pic") != null) {
                         $pic= "";

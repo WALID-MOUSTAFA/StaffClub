@@ -128,7 +128,7 @@
 				    @if($user->designation)
 					<tr>
 					    <td class="td-key">المسمى الوظيفي</td>
-					    <td>{{ $user->email }}</td>
+					    <td>{{ $user->designation }}</td>
 					</tr>
 				    @endif
 

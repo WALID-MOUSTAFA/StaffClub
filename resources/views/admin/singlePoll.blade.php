@@ -18,8 +18,13 @@
 		 </p>
 		 </div>
 	    -->
-	    <a href="/admin/polls/{{ $poll->id }}/add-question">
-		<button class="btn btn-primary">إضافة سؤال جديد</button>
+
+	    <div class="card-body ">
+		
+		<a class="float-left" href="/admin/polls/{{ $poll->id }}/add-question">
+		    <button class="btn btn-primary">إضافة سؤال جديد
+			<i class="fa fa-plus"></i>
+		    </button>
 	    </a>
 
 	    <table class="table">
@@ -49,19 +54,22 @@
 				<a href="/admin/questions/edit/{{ $question->id }}">
 				    <button class="btn btn-warning edit-question">
 					تعديل
+					<i class="fa fa-edit"></i>
 				    </button>
 				    
 				</a>
-				<form method="post" class="inline-form" action="/admin/questions/delete/{{$question->id }}">
+				<form method="post" class="d-inline" action="/admin/questions/delete/{{$question->id }}">
 				    @csrf
-				    <button class="btn btn-danger delete-question">حذف</button>
+				    <button class="submit-delete btn btn-danger delete-question">حذف
+					<i class='fa fa-trash''></i>
+				    </button>
 				</form>
 			    </td>
 			</tr>
 		    @endforeach
 		</tbody>
 	    </table>
-	    
+	    </div>
 	</div>
 
     </div>

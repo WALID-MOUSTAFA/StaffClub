@@ -12,10 +12,15 @@
     <div class="polls-wrapper">
 
 	<div class="card ">
-	    <card class="card-heade">
-		<p class="h1">إضافة سؤال</p>
+	    <card class="card-header bg-success text-center">
+		<p class="h3">إضافة سؤال</p>
 	    </card>
-	    <button type="button" class="btn btn-primary add-option">إضافة خيار</button>
+
+	    <div class="card-body">
+		<button type="button" class="my-2 btn btn-primary add-option float-left">إضافة خيار
+		    <i class="fa fa-plus"></i>
+
+		</button>
 
 	    <form method="post" action="/admin/polls/{{ $poll->id }}/add-question">
 		@csrf
@@ -31,9 +36,11 @@
 		</ul>
 		
 
-		<button id="submit-edit" class="btn btn-warning btn-block">حفظ</button>
+		<button id="submit-edit" class="btn btn-success btn-block">حفظ
+		    <i class="fa fa-plus"></i>
+		</button>
 	    </form>
-	    
+	    </div>
 	</div>
 
     </div>
@@ -51,7 +58,7 @@
      console.log("d");
      var element= "<div class='input-wrapper'>"
      element += "<input class='form-control' name='options[]' />";
-     element += "<button type='button' class='btn btn-danger delete-option'>حذف</button>";
+     element += "<button type='button' class='my-2 btn btn-danger delete-option'>حذف الخيار <i class='fa fa-trash'> </i></button>";
     element += "</div>";
 
      $("ul.options").append(element);

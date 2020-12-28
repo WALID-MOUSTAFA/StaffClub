@@ -35,6 +35,11 @@
 		</tr>
 
 		<tr>
+		    <td>الكلية</td>
+		    <td>{{ $member->faculty->name }}</td>
+		</tr>
+
+		<tr>
 		    <td>الصورة الشخصية</td>
 		    <td><img src="/uploads/{{ $member->pic }}"/></td>
 		</tr>
@@ -48,8 +53,10 @@
 				<div class="relative">
 				    <li>
 					    {{ $relative->fullname }}
-					    <button  class="btn btn-primary view-relative">عرض</button>
-					    <button class="btn btn-warning edit-relative">تعديل</button>
+					<button  class="btn btn-primary view-relative">عرض
+					    <i class="fa fa-external-link-alt"></i>
+					</button>
+					<!-- <button class="btn btn-warning edit-relative">تعديل</button> -->
 
 
 				    </li>

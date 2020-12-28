@@ -40,6 +40,16 @@ class PollController extends Controller
         
         public function postAddSinglePoll() {
                 //TODO(walid): validations;
+
+                $validator = Validator::make(request()->all(), [
+                        "title"=> "required",
+                        "desc" => "required"
+                ], [], ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
+
+                if($validator->fails()) {
+                        return back()->withErrors($validator)->withInput();
+                } 
+                
                 $poll= new \App\Models\Poll();
                 $poll->title= request()->get("title");
                 $poll->desc= request()->get("desc");
@@ -69,7 +79,7 @@ class PollController extends Controller
                 $validator= Validator::make(request()->all(), [
                         "title" => "required",
                         "desc" => "required",
-                ]);
+                ],[], ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
                 if($validator->fails()) {
                         return back()->withErrors($validator);
 

@@ -10,22 +10,31 @@
 
     
     <div class="wrapper">
+
+	<div class="card-header bg-warning text-center">
+	    <p class="h3">إضافة استبيان جديد</p>
+	</div>
+	
+
 	
 	<div class="card">
-
 	    
-	    @if($errors->any())
-		<div class="alert alert-danger">
-		    <ul>
-			@foreach($errors->all() as $error)
-			    <li>{{ $error }}</li>
-			@endforeach
-		    </ul>
-		</div>
-	    @endif
+	    <card class="card-body">
 
-	    
-	    <form method="post" class="delete-poll-form d-inline" action="/admin/polls/edit/{{$poll->id }}">
+		
+		
+		@if($errors->any())
+		    <div class="alert alert-danger">
+			<ul>
+			    @foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			    @endforeach
+			</ul>
+		    </div>
+		@endif
+
+		
+	    <form method="post" class="" action="/admin/polls/edit/{{$poll->id }}">
 		@csrf
 		<div class="input-wrapper">
 		    <label for="">عنوان الاستبيان</label>
@@ -47,9 +56,12 @@
 
 		</div>
 
-		<button type="submit" class="btn btn-warning btn-block">تعديل</button>
+		<button type="submit" class="btn btn-warning btn-block">تعديل
+		    <i class="fa fa-edit"></i>
+		</button>
 	    </form>
 
+	    </card>
 	    
 	</div>
     </div>

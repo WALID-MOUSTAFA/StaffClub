@@ -12,18 +12,17 @@ class SearchController extends Controller
                         $members= null;
                         return view("admin/search")->with([
                                 "members"=> $members
-                        ])->withInputs();
+                        ]);
                 }
 
                 
-                $members= \App\Models\Member::where("fullname", "like", "%$q%")
+                $members= \App\Models\Member::with("relatives")->where("fullname", "like", "%$q%")
                         ->orWhere("nat_id","=","$q")
                         ->orWhereHas("relatives", function($query) use($q) {
-                                $query->where("fullname", "like", "%$q%");
-                                $query->where("nat_id", "=", "%$q%");
+                                $query->where("fullname", "like", "%$q%")->orWhere("nat_id", "=", "%$q%");
                         })
                         ->get();
-                
+
                 
                 return view("admin/search")->with([
                         "members"=> $members

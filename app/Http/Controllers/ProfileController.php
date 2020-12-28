@@ -33,11 +33,20 @@ class ProfileController extends Controller
         //TODO(walid): it's too late, finish the validator later;
         public function editMember($id)
         {
-
+                
                 $current_member_id= session()->get("user")->id;
                 if($current_member_id != $id) {
                         return "error";
-                } 
+                }
+
+                
+                $requestData= request()->all();
+                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
+                }
+                request()->replace($requestData);
+
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
@@ -64,6 +73,10 @@ class ProfileController extends Controller
                 if(request()->has("password") && request()->get("password") != null){
                         $current_user->password= request()->get("password");
                 }
+                if(request()->get("designation") != null) {
+                        $member->designation = request()->get("designation");
+                }
+
                 if(request()->hasFile("pic") && request()->file("pic") != null) {
                         $pic= "";
                         $pic=request()->file("pic");
