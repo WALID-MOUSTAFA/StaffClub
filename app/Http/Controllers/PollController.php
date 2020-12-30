@@ -74,6 +74,7 @@ class PollController extends Controller
 
 
         public function postEditSinglePoll($id) {
+
                 // dd(request()->all());
                 $poll = \App\Models\Poll::find($id);
                 $validator= Validator::make(request()->all(), [
@@ -130,6 +131,20 @@ class PollController extends Controller
                 $poll= \App\Models\Poll::find($id);
                 $options=[];
                 $question= new \App\Models\Question();
+
+                $validator = Validator::make(request()->all(),[
+                        "question_body" => "bail|required",
+                        "options"=>"bail|required|array|min:2,"
+                ],[
+                        "question_body.required"=>"السؤال لا يمكن أن يكون فارغا!",
+                        "options.required" => "يجب إضافة خيارات للسؤال!",
+                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين."
+                ],[]);
+
+                if($validator->fails()) {
+                        return back()->withErrors($validator);
+                } 
+                
                 foreach(request()->get("options") as $option) {
                         $o= new \App\Models\Option();
                         $o->option_body= $option;
@@ -162,6 +177,21 @@ class PollController extends Controller
         public function postEditQuestion($id) {
                 $question = \App\Models\Question::find($id);
                 $options= [];
+
+                
+                $validator = Validator::make(request()->all(),[
+                        "question_body" => "bail|required",
+                        "options"=>"bail|required|array|min:2,"
+                ],[
+                        "question_body.required"=>"السؤال لا يمكن أن يكون فارغا!",
+                        "options.required" => "يجب إضافة خيارات للسؤال!",
+                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين."
+                ],[]);
+
+                if($validator->fails()) {
+                        return back()->withErrors($validator);
+                } 
+
                 foreach(request()->get("options") as $option) {
                         $o= new \App\Models\Option();
                         $o->option_body= $option;

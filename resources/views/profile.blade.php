@@ -250,8 +250,12 @@
 							</div>
 							
 							<div class="modal-footer">
-							    <button type="submit" class="btn btn-warning submit-edit-relative-form">تعديل</button>
-							    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+							    <button type="submit" class="btn btn-warning submit-edit-relative-form">تعديل
+								<i class="fa fa-edit"></i>
+							    </button>
+							    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء
+								<i class="fa fa-times"></i>
+							    </button>
 							</div>
 
 							    </form>
@@ -264,6 +268,7 @@
 					    <!-- view relative modal -->
 					    <div class="view-relative-modal modal" tabindex="-1" role="dialog">
 						<div class="modal-dialog" role="document">
+
 						    <div class="modal-content">
 							<div class="modal-header">
 							    <h5 class="modal-title">عرض القريب</h5>
@@ -292,7 +297,16 @@
 
 								<tr>
 								    <td>القرابة</td>
-								    <td>{{ $relative->kinship->type }}</td>
+								    <td>
+									{{ $relative->kinship->type == "son"? "ابن" : "" }}
+									{{ $relative->kinship->type == "daughter"? "ابنة" : "" }}
+									{{ $relative->kinship->type == "father"? "اب" : "" }}
+									{{ $relative->kinship->type == "mother"? "أم" : "" }}
+									{{ $relative->kinship->type == "sister"? "أخت" : "" }}
+									{{ $relative->kinship->type == "brother"? "أخ" : "" }}
+									{{ $relative->kinship->type == "husband"? "زوج" : "" }}
+									{{ $relative->kinship->type == "wife"? "زوجة" : "" }}
+								    </td>
 								</tr>
 
 								
@@ -307,8 +321,11 @@
 							</div>
 							
 							<div class="modal-footer">
-							    <button type="button" class="btn btn-primary">Save changes</button>
-							    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+							    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+								إغلاق
+								<i class="fa fa-times"></i>
+							    </button>
 							</div>
 						    </div> 
 						</div>
@@ -337,10 +354,12 @@
 
 						<button class="view-relative btn btn-success">
 						    عرض
+						    <i class="fa fa-external-link-alt"></i>
 						</button>
 
 						<button class="edit-relative btn btn-warning">
 						    تعديل
+						    <i class="fa fa-edit"></i>
 						</button>
 						
 
@@ -348,6 +367,7 @@
 						    @csrf
 						    <button class="delete-relative btn btn-danger">
 							حذف
+							<i class="fa fa-trash-alt"></i>
 						    </button>
 						</form>
 

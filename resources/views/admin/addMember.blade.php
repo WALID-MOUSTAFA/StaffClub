@@ -87,7 +87,9 @@
 		    </div>
 		</div>
 		
-		<button class="btn btn-success">إضافة</button>
+		<button class="btn btn-success">إضافة
+		    <i class="fa fa-plus"></i>
+		</button>
 
 		
 	    </form>

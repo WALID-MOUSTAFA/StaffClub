@@ -48,7 +48,7 @@
 	    <div class="clearfix"></div>
 
 	    
-	    <form id="edit-member-form" class="edit-member-form" method="post" action="/admin/members/edit/{{ $member->id }}">
+	    <form id="edit-member-form" class="edit-member-form" method="post" action="/admin/members/edit/{{ $member->id }}" enctype="multipart/form-data">
 		@csrf
 
 		

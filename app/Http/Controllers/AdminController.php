@@ -43,7 +43,9 @@ class AdminController extends Controller
         public function postEditSingleMember($id) {
 
                 $requestData= request()->all();
-                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                if(request()->has("password")){
+                        $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                }
                 if(request()->has("password")){
                         $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
                 }
@@ -76,7 +78,7 @@ class AdminController extends Controller
                         $pic=request()->file("pic");
                         $validator = Validator::make(request()->all(), ["pic"=> "between:0,2048|mimes:jpeg,png,svg,gif"]);
                         if($validator->fails()) {
-                                return redirect("/profile") ->withErrors($validator)
+                                return back() ->withErrors($validator)
                                                             ->withInput();
                         }
 
@@ -213,7 +215,9 @@ class AdminController extends Controller
                 if($member->save()) {
                         session()->flash("success", "تم إضافة العضو بنجاح");
                         return redirect("/admin/members");
-                } //TODO(walid): handle errors;
+                } else {
+                        return "<h1>error, something wrong happened </h1>";
+                }
 
         }
 

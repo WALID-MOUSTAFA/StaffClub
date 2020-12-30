@@ -69,7 +69,9 @@
 		</div>
 	    </div>
 	    
-	    <button class="btn btn-warning btn-block">تعديل</button>
+	    <button class="btn btn-warning btn-block">تعديل
+		<i class="fa fa-edit"></i>
+	    </button>
 
 	    
 	</form>

@@ -68,7 +68,7 @@
 					<div class="modal-content">
 					    <div class="modal-header">
 						<h5 class="modal-title">عرض القريب</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="btn" data-dismiss="modal" aria-label="Close">
 						    <span aria-hidden="true">&times;</span>
 						</button>
 					    </div>
@@ -93,7 +93,16 @@
 
 						    <tr>
 							<td>القرابة</td>
-							<td>{{ $relative->kinship->type }}</td>
+							<td>
+							    {{ $relative->kinship->type == "son"? "ابن" : "" }}
+							    {{ $relative->kinship->type == "daughter"? "ابنة" : "" }}
+							    {{ $relative->kinship->type == "father"? "اب" : "" }}
+							    {{ $relative->kinship->type == "mother"? "أم" : "" }}
+							    {{ $relative->kinship->type == "sister"? "أخت" : "" }}
+							    {{ $relative->kinship->type == "brother"? "أخ" : "" }}
+							    {{ $relative->kinship->type == "husband"? "زوج" : "" }}
+							    {{ $relative->kinship->type == "wife"? "زوجة" : "" }}
+							</td>
 						    </tr>
 
 						    
@@ -103,13 +112,13 @@
 							<td><img class="img-thumbnail" src="/uploads/{{ $relative-> pic }}" /></td>
 						    </tr>
 
-عرض						    
 						</table>
 					    </div>
 					    
 					    <div class="modal-footer">
-						<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+						<button type="button" class="my-2 btn btn-secondary" data-dismiss="modal">إغلاق
+						    <i class="fa fa-times"></i>
+						</button>
 					    </div>
 					</div> 
 				    </div>

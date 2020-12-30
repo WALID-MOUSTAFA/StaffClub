@@ -12,10 +12,6 @@
 	
 
 	<div class="card-body">
-	    <a href="/admin/members/add" class="btn btn-primary clearfix float-left">إضافة عضو
-		<i class="fa fa-plus"></i>
-
-	    </a>
 
 	    
 	    @if(session()->has("success"))
@@ -30,6 +26,12 @@
 		    {{ session()->get("error") }}
 		</div>
 	    @endif
+
+	    
+	    <a href="/admin/members/add" class="btn btn-primary clearfix float-left">إضافة عضو
+		<i class="fa fa-plus"></i>
+
+	    </a>
 
 	    
 	    <table class="table">

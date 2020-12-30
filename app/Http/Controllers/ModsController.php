@@ -203,7 +203,7 @@ class ModsController extends Controller
                 }
                 $mod->gender= request()->get("gender");
                 $mod->phone= request()->get("phone");
-                
+                $mod->logout = 1;
                 if($mod->save()) {
                         session()->flash("success", "تم تعديل المشرف بنجاح");
                         return redirect("admin/mods");

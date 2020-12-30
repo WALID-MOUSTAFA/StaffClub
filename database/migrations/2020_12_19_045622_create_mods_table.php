@@ -19,7 +19,7 @@ class CreateModsTable extends Migration
 
             $table->string("fullname", 1000);
             $table->string("nat_id", 14);
-            $table->enum("gender", ["male", "female"]);
+            $table->enum("gender", ["male", "female"])->nullable();
             $table->string("phone")->nullable();
             $table->double("age", 10)->nullable();
             $table->string("password", 1000); //TODO(walid): remove the nullable;

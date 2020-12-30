@@ -29,7 +29,7 @@
 	@endif
 	
 
-	<form method="post" action="/admin/mods/add" enctype="multipart/form-data">
+	<form method="post" action="/admin/mods/add-mod" enctype="multipart/form-data">
 	    @csrf
 	    <div class="input-wrapper">
 		<label for="">الاسم الكامل</label>
@@ -70,7 +70,9 @@
 		</div>
 	    </div>
 	    
-	    <button class="btn btn-success btn-block">إضافة</button>
+	    <button class="btn btn-success btn-block">إضافة
+		<i class="fa fa-plus"></i>
+	    </button>
 
 	    
 	</form>
