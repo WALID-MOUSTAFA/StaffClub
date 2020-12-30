@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-//TODO(walid): put(logout in the middleware to enable admin log out users);
 
 class CreateMembersTable extends Migration
 {

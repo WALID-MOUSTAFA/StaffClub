@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Validator;
 class ProfileController extends Controller
 {
 
-        //TODO(walid): use bootstrap card pic instead of custom one;
-        //TODO(walid): edit member data;
 
 
         
@@ -29,8 +27,6 @@ class ProfileController extends Controller
 
 
 
-        //TODO(walid): prevent member from editing another member except super_admin;
-        //TODO(walid): it's too late, finish the validator later;
         public function editMember($id)
         {
                 
@@ -41,7 +37,11 @@ class ProfileController extends Controller
 
                 
                 $requestData= request()->all();
-                $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+
+                if(request()->has("nat_id")){
+
+                        $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
+                }
                 if(request()->has("password")){
                         $requestData["password"]  = fromEasternArabicToWestern($requestData["password"]);
                 }
@@ -61,7 +61,7 @@ class ProfileController extends Controller
                         session()->flash("edit-member-errors", ""    );
                         return redirect("/profile") ->withErrors($validator)
                                                     ->withInput();
-
+                        
                 }
                 
                 $current_user= session()->get("user");

@@ -13,8 +13,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700&display=swap" rel="stylesheet"> 
     </head>
 
-    <!-- TODO(walid): add font awesome -->
-    <!-- TODO(walid): download jquery and bootstrap locally -->
 
     <body>
 

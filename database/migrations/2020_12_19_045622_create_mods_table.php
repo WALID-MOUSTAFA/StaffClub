@@ -22,7 +22,7 @@ class CreateModsTable extends Migration
             $table->enum("gender", ["male", "female"])->nullable();
             $table->string("phone")->nullable();
             $table->double("age", 10)->nullable();
-            $table->string("password", 1000); //TODO(walid): remove the nullable;
+            $table->string("password", 1000); 
             $table->boolean("logout")->default(false);
             $table->string("pic")->nullable()->default("default.jpg");
         });

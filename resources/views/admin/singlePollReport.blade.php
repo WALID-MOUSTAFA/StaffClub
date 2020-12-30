@@ -12,7 +12,10 @@
     <div class="polls-wrapper">
 
 	<div class="card">
-	    <p class="h2 text-center">نتيجة استبيان: {{ $poll->title }}</p>
+	    <div class="card-header bg-primary">
+		<p class="h2 text-center">نتيجة استبيان: {{ $poll->title }}</p>
+
+	    </div>
 
 	    <table class="table table-bordered">
 		<tbody>

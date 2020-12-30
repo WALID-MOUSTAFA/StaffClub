@@ -17,7 +17,6 @@ class ModsController extends Controller
 
 
         public function postLogin(Request $request) {
-                //TODO(walid): validations;
 
                 $requestData= request()->all();
                 $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
@@ -100,7 +99,6 @@ class ModsController extends Controller
                 request()->replace($requestData);
 
                 
-                //TODO(walid): validators;
                 $validator = Validator::make(request()->all(),[
                         "fullname" => "required:digits",
                         "nat_id"=> "required|digits:14|unique:mods",
@@ -166,7 +164,6 @@ class ModsController extends Controller
                 request()->replace($requestData);
 
                 
-                //TODO(walid): validators;
                 $validator = Validator::make(request()->all(),[
                         "fullname" => "required:digits",
                         "nat_id"=> "required|digits:14|unique:mods,nat_id,".$mod->id,

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Member;
 
 
-//TODO(walid): replace eastern arabic numbers;
 
 class LoginController extends Controller
 {

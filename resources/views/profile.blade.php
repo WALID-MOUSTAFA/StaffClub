@@ -16,8 +16,6 @@
 	
     </head>
 
-    <!-- TODO(walid): add font awesome -->
-    <!-- TODO(walid): download jquery and bootstrap locally -->
 
     <body>
 

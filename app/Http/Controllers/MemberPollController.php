@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MemberPollController extends Controller
 {
@@ -24,6 +25,17 @@ class MemberPollController extends Controller
                 //TODO(walid): perform checks and validations;
                 $answers=[];
                 $member= session()->get("user");
+
+                $validator = Validator::make(
+                        request()->all(),
+                        [
+                                "answers"=>"required|array"
+                        ]
+                );
+
+                if($validator->fails()) {
+                        return "error";
+                }
                 $poll= \App\Models\Poll::find(request()->get("poll_id"));
 
                 if(memberAllowedToVote($member, $poll) == false) {

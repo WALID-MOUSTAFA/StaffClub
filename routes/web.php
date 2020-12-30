@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//TODO(walid): separate member into it's own controller;
-//TODO(walid): separate familyrelative into it's own controller;
-//TODO(walid): add logout=1 after major edit;
 
 Route::get("/", "\App\Http\Controllers\HomeController@index");
 
@@ -67,8 +64,7 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
 
 
-        //TODO(walid): change get to post in production;
-        Route::get("/logout", "App\Http\Controllers\LoginController@logout")
+x        Route::get("/logout", "App\Http\Controllers\LoginController@logout")
                 ->middleware("checkMemberLogin");
 
         //////////////////////////////////////////////////////
@@ -85,7 +81,6 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
         
 
         
-        //TODO(walid): add admin middleware;
         Route::get("/admin/mods", "App\Http\Controllers\ModsController@allMods")
                 ->middleware("checkIfMod");
 

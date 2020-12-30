@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-//TODO(walid): all checks and validations and error messages;
+
 
 
 class PollController extends Controller
@@ -39,7 +39,7 @@ class PollController extends Controller
 
         
         public function postAddSinglePoll() {
-                //TODO(walid): validations;
+
 
                 $validator = Validator::make(request()->all(), [
                         "title"=> "required",

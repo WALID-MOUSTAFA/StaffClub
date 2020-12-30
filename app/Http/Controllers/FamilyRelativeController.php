@@ -58,10 +58,13 @@ class FamilyRelativeController extends Controller
                                         $relative->pic= $pic;
 
                 }
-                
-                //TODO(walid): check if exists;
-                $kinship= \App\Models\Kinship::find($req_kinship);
 
+                
+                $kinship= \App\Models\Kinship::find($req_kinship);
+                if($kinship == null) {
+                        return "error";
+                } //TODO(walid): handle error properly;
+                
                 $relative->fullname= $fullname;
                 $relative->nat_id= $nat_id;
                 $relative->kinship()->associate($kinship);
@@ -84,8 +87,6 @@ class FamilyRelativeController extends Controller
         public function editRelative($relativeId)
         {
                 
-                // dd(request()->all());
-                //TODO(walid): make validator;
 
                 $relative= \App\Models\FamilyRelative::find($relativeId);
 
@@ -129,9 +130,10 @@ class FamilyRelativeController extends Controller
                 }
 
                 
-                //TODO(walid): check if exists;
                 $kinship= \App\Models\Kinship::find($req_kinship);
-                
+                if($kinship == null) {
+                        return "error";
+                } //TODO(walid): handle error properly;
                 
 
                 $relative -> fullname= $fullname;

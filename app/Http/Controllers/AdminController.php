@@ -43,7 +43,7 @@ class AdminController extends Controller
         public function postEditSingleMember($id) {
 
                 $requestData= request()->all();
-                if(request()->has("password")){
+                if(request()->has("nat_id")){
                         $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
                 }
                 if(request()->has("password")){
@@ -120,7 +120,9 @@ class AdminController extends Controller
                 if($member->save()) {
                         session()->flash("success", "تم التعديل بنجاح");
                         return redirect("/admin/members");
-                } //TODO(walid): handle errors;
+                } else {
+                        return "<h1> error, something wrong happened</h1>";
+                }//TODO(walid): handle errors properly;
 
                 
         }
