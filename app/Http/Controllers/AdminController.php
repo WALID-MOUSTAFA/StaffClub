@@ -62,6 +62,9 @@ class AdminController extends Controller
                         // "kinship"=>"required",
                         "gender"=> "required",
                         "faculty"=> "required",
+                        "status"=>"required",
+                        "designation"=>"required",
+
                 ]);
 
                 
@@ -96,8 +99,10 @@ class AdminController extends Controller
                 if(request()->get("designation") != null) {
                         $member->designation = request()->get("designation");
                 }
+                $member->status = request()->get("status");
 
-                $faculty = \App\Models\Faculty::find(request()->get("faculty"));
+                $member->faculty = request()->get("faculty"); ;
+
 
                 if(request()->has("nat_id") ) {
                         $member->nat_id= request()->get("nat_id");
@@ -113,7 +118,6 @@ class AdminController extends Controller
                 $member->fullname= $fullname;
                 $member->phone= $phone;
                 $member->gender= $gender;
-                $member->faculty()->associate($faculty);
                 
                 $member->logout= 1;
                 
@@ -154,7 +158,9 @@ class AdminController extends Controller
                         "password"=> "required",
                         // "kinship"=>"required",
                         "gender"=> "required",
+                        "status"=>"required",
                         "faculty"=>"required",
+                        "designation"=>"required",
                 ]);
 
                 
@@ -194,7 +200,10 @@ class AdminController extends Controller
                 if(request()->get("designation") != null) {
                         $member->designation = request()->get("designation");
                 }
-                $member->faculty()->associate(\App\Models\Faculty::find(request()->get("faculty")));
+                $member->status = request()->get("status");
+
+                $member->faculty = request()->get("faculty"); ;
+
                 
                 
                 if(request()->hasFile("pic") && request()->file("pic") != null) {

@@ -25,11 +25,12 @@
 	    @else
 		
 	<table class="table">
-	    <thead>
+	    <thead class="bg-primary">
 		<th>الاسم الكامل</th>
 		<th>الرقم القومي</th>
 		<th>الكلية</th>
 		<th>المسمى الوظيفي</th>
+		<th>الحالة</th>
 
 		<th>الأقارب</th>
 		<th>خيارات</th>
@@ -41,8 +42,9 @@
 		    <tr>
 			<td> {{ $member->fullname }}</td>
 			<td> {{ $member->nat_id}}</td>
-			<td> {{ $member->faculty->name }}</td>
+			<td> {{ $member->faculty }}</td>
 			<td> {{ $member->designation }}</td>
+			<td> {{ $member->status }}</td>
 
 			<td><ul>
 			    @foreach($member->relatives()->get() as $relative)

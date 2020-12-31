@@ -28,10 +28,10 @@ class Member extends Model
         }
 
         
-        public function faculty()
-        {
-                return $this->belongsTo(Faculty::class);
-        }
+        // public function faculty()
+        // {
+        //         return $this->belongsTo(Faculty::class);
+        // }
 
         
 }

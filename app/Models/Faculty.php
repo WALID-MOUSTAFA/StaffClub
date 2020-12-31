@@ -10,9 +10,9 @@ class Faculty extends Model
         use HasFactory;
 
         
-        public function members()
-        {
-                return $this->hasMany(Member::class);
-        }
+        // public function members()
+        // {
+        //         return $this->hasMany(Member::class);
+        // }
 
 }

@@ -14,15 +14,18 @@ class CreateMembersTable extends Migration
                         $table->timestamps();
                         $table->string("fullname", 1000);
                         $table->string("nat_id", 14);
-                        $table->enum("gender", ["male", "female"]);
+                        $table->enum("gender", ["male", "female"])->nullable();
                         $table->string("phone");
                         $table->double("age", 10)->nullable();
                         $table->string("password", 1000)->nullable(); //TODO(walid): remove the nullable;
                         $table->boolean("logout")->default(false);
                         $table->string("pic")->nullable()->default("default.jpg");
                         $table->string("designation")->nullable();
-                        $table->unsignedBigInteger("faculty_id")->nullable();
-                        $table->foreign("faculty_id")->references("id")->on("faculties")->onDelete("set null");
+                        $table->string("status")->nullable();
+                        // $table->unsignedBigInteger("faculty_id")->nullable();
+                        $table->string("faculty")->nullable();
+
+                        // $table->foreign("faculty_id")->references("id")->on("faculties")->onDelete("set null");
                 });
         }
         

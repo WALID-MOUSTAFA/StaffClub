@@ -36,8 +36,18 @@
 
 		<tr>
 		    <td>الكلية</td>
-		    <td>{{ $member->faculty->name }}</td>
+		    <td>{{ $member->faculty }}</td>
 		</tr>
+		
+		<tr>
+		    <td>الوظيفة</td>
+		    <td>{{ $member->designation }}</td>
+		</tr>
+
+		<td>الحالة</td>
+		<td>{{ $member->status }}</td>
+		</tr>
+
 
 		<tr>
 		    <td>الصورة الشخصية</td>

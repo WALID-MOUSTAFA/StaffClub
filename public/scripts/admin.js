@@ -8,4 +8,19 @@ $(document).ready(function() {
 			return false;
 		} 
 	});
+
+
+
+	
+	$(window).on("resize", function(){
+		$("div#categories").height($(window).height());
+		mini_side = true		
+		if (mini_side) {
+			$("a[data-widget='pushmenu']").click()
+		}
+	});
+	$(window).resize()
+		
+
+
 });

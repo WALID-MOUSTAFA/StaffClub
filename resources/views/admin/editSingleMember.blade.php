@@ -88,13 +88,19 @@
 
 		</div>
 
+		<div class="input-wrapper">
+		    <label for="">حالة العمل</label>
+		    <input class="form-control" name="status" type="text" value="{{$member->status }}"/>
+
+		</div>
+
 
 		
 		<div class="input-wrapper">
 		    <label for="">الكلية</label>
 		    <select name="faculty" class="form-control custom-select">
 			@foreach(\App\Models\Faculty::all() as $fac)
-			    <option value="{{$fac->id }}" {{$member->faculty()->first()->id == $fac->id ? "selected" : "" }}>
+			    <option value="{{$fac->name }}" {{$member->faculty == $fac->name ? "selected" : "" }}>
 				{{$fac->name}}
 			    </option>
 			@endforeach

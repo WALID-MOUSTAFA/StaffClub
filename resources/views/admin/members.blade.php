@@ -41,6 +41,7 @@
 		    <th>رقم الهاتف</th>
 		    <th>الكلية</th>
 		    <th>المسمى الوظيفي</th>
+		    <th>الحالة</th>
 
 		    <th>خيارات</th>
 
@@ -52,8 +53,9 @@
 			    <td> <a href="/admin/members/{{$member->id}}"> {{ $member->fullname }} </a></td>
 			    <td> {{ $member->nat_id }}</td>
 			    <td> {{ $member->phone }}</td>
-			    <td> {{ $member->faculty->name }}</td>
+			    <td> {{ $member->faculty }}</td>
 			    <td> {{ $member->designation }}</td>
+			    <td> {{ $member->status }}</td>
 
 			    <td>
 				<a href="/admin/members/edit/{{ $member->id }}">

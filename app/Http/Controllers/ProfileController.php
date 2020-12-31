@@ -49,11 +49,11 @@ class ProfileController extends Controller
 
                 
                 $validator= Validator::make(request()->all(), [
-                        "fullname"=> "required",
-                        "phone"=>"required",
+                        // "fullname"=> "required",
+                        // "phone"=>"required",
                         // "kinship"=>"required",
-                        "gender"=> "required",
-                        "faculty"=>"required",
+                        // "gender"=> "required",
+                        // "faculty"=>"required",
                 ]);
 
                 
@@ -65,10 +65,18 @@ class ProfileController extends Controller
                 }
                 
                 $current_user= session()->get("user");
-                $current_user->fullname= request()->get("fullname");
-                $current_user->phone = request()->get("phone");
-                $current_user->gender = request()->get("gender");
-                $current_user->faculty()->associate(\App\Models\Faculty::find(request()->get("faculty")));
+                // $current_user->fullname= request()->get("fullname");
+
+                if(request()->has("phone") && request()->get("phone") != null){
+                        $current_user->phone = request()->get("phone");
+                }
+
+                if(request()->has("gender") && request()->get("gender") != null){
+                        $current_user->gender = request()->get("gender");
+
+                }
+
+                
 
                 if(request()->has("password") && request()->get("password") != null){
                         $current_user->password= request()->get("password");

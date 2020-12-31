@@ -67,12 +67,18 @@
 
 		</div>
 
+		<div class="input-wrapper">
+		    <label for="">حالة العمل</label>
+		    <input class="form-control" name="status" type="text" value=""/>
 
+		</div>
+
+		
 		<div class="input-wrapper">
 		    <label for="">الكلية</label>
 		    <select name="faculty" class="form-control custom-select">
 			@foreach(\App\Models\Faculty::all() as $fac)
-			    <option value="{{$fac->id }}">
+			    <option value="{{$fac->name }}">
 				{{$fac->name}}
 			    </option>
 			@endforeach

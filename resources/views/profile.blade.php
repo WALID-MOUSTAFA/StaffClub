@@ -123,26 +123,27 @@
 
 				    <tr>
 					<td class="td-key">الكلية</td>
-					<td>{{ $user->faculty()->first()->name }}</td>
+					<td>{{ $user->faculty }}</td>
 				    </tr>
 
 				    
 				    @if($user->designation)
 					<tr>
-					    <td class="td-key">المسمى الوظيفي</td>
+					    <td class="td-key"> الوظيفة</td>
 					    <td>{{ $user->designation }}</td>
+					</tr>
+				    @endif
+
+				    @if($user->designation)
+					<tr>
+					    <td class="td-key">الحالة</td>
+					    <td>{{ $user->status }}</td>
 					</tr>
 				    @endif
 
 				    
 
-				    
-				    <tr>
-					<td class="td-key">الجنس</td>
-					<td> {{ $user->gender == "male"? "ذكر"
-						: "أنثى"}}</td>
-				    </tr>
-
+				   
 				    
 				</tbody>
 			    </table>
@@ -502,11 +503,11 @@
 			    @csrf
 
 			    
-			    <div class="input-wrapper">
-				<label for="">الاسم بالكامل</label>
-				<input type="text" name="fullname" class="form-control" id=""  value="{{ $user->fullname }}" placeholder="الاسم الكامل" />
-			    </div>
-
+			    <!-- <div class="input-wrapper">
+				 <label for="">الاسم بالكامل</label>
+				 <input type="text" name="fullname" class="form-control" id=""  value="{{ $user->fullname }}" placeholder="الاسم الكامل" />
+				 </div>
+			    -->
 			    <div class="input-wrapper">
 				<label for="">رقم الهاتف</label>
 				<input type="text" name="phone" class="form-control" id=""  value="{{ $user->phone }}" placeholder="رقم الهاتف" />
@@ -516,27 +517,27 @@
 				<label for="">كلمة المرور</label>
 				<input type="password" name="password" class="form-control" id=""  value="" placeholder="" />
 			    </div>
-
-			    <div class="input-wrapper">
+			    
+			    {{-- <div class="input-wrapper">
 				<label for="">الكلية</label>
 				<select name="faculty" class="form-control custom-select">
 				    @foreach(\App\Models\Faculty::all() as $fac)
-					<option value="{{$fac->id }}" {{$user->faculty()->first()->id == $fac->id ? "selected" : "" }}>
+					<option value="{{$fac->name }}" {{$user->faculty == $fac->name ? "selected" : "" }}>
 					    {{$fac->name}}
 					</option>
 				    @endforeach
 				</select>
-			    </div>
+			    </div>   --}}
 
-			    
-			    <div class="input-wrapper">
-				<label for="">الجنس</label>
-				<select name="gender" class="custom-select">
-				    <option value="male" {{ $user->gender=="male"? "selected" : "" }}>ذكر</option>
-				    <option value="female"  {{ $user->gender=="female"? "selected" : "" }} >أنثى</option>
-				</select>
-			    </div>
-			    
+			    <!-- 
+				 <div class="input-wrapper">
+				 <label for="">الجنس</label>
+				 <select name="gender" class="custom-select">
+				 <option value="male" {{ $user->gender=="male"? "selected" : "" }}>ذكر</option>
+				 <option value="female"  {{ $user->gender=="female"? "selected" : "" }} >أنثى</option>
+				 </select>
+				 </div>
+			    -->
 			    <div class="custom-file">
 				<input type="file" class="custom-file-input" id="" name="pic">
 				<label class="custom-file-label" for="">تغيير الصورة</label>
