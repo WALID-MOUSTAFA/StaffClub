@@ -24,7 +24,7 @@
 		<p class="h4">لا يوجد نتائج!</p>
 	    @else
 		
-	<table class="table">
+	<table class="table-responsive table">
 	    <thead class="bg-primary">
 		<th>الاسم الكامل</th>
 		<th>الرقم القومي</th>
@@ -51,7 +51,7 @@
 				<li>{{ $relative->fullname }}</li>
 			    @endforeach
 			</ul></td>
-			<td>
+			<td class="d-flex">
 			    <a href="/admin/members/{{ $member->id }}">
 				<button class="btn btn-primary">عرض
 				    <i class="fa fa-external-link-alt"></i>

@@ -37,7 +37,7 @@
 	    <i class="fa fa-plus"></i>
 	</a>
 
-	<table class="table">
+	<table class="table-responsive table">
 	    
 	    <thead>
 		<tr>

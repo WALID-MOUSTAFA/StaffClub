@@ -134,11 +134,15 @@ class PollController extends Controller
 
                 $validator = Validator::make(request()->all(),[
                         "question_body" => "bail|required",
-                        "options"=>"bail|required|array|min:2,"
+                        "options"=>"bail|required|array|min:2,",
+                        "options.*"=>"required|string"
                 ],[
                         "question_body.required"=>"السؤال لا يمكن أن يكون فارغا!",
                         "options.required" => "يجب إضافة خيارات للسؤال!",
-                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين."
+                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين.",
+                        "options.*.required"=> "لا يمكن إضافة خيار فارغ!",
+                        "options.*.string"=> "لا يمكن إضافة خيار فارغ!",
+
                 ],[]);
 
                 if($validator->fails()) {
@@ -181,11 +185,15 @@ class PollController extends Controller
                 
                 $validator = Validator::make(request()->all(),[
                         "question_body" => "bail|required",
-                        "options"=>"bail|required|array|min:2,"
+                        "options"=>"bail|required|array|min:2,",
+                        "options.*"=>"required|string"
+
                 ],[
                         "question_body.required"=>"السؤال لا يمكن أن يكون فارغا!",
                         "options.required" => "يجب إضافة خيارات للسؤال!",
-                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين."
+                        "options.min" => "لا يجب أن يقل عدد الخيارات عن اثنين.",
+                        "options.*.required"=> "لا يمكن إضافة خيار فارغ!",
+                        "options.*.string"=> "لا يمكن إضافة خيار فارغ!",
                 ],[]);
 
                 if($validator->fails()) {

@@ -14,7 +14,7 @@
 
 
     <div class="card">
-	<table class="table">
+	<table class="table-responsive table">
 	    
 	    <tbody>
 		
@@ -84,7 +84,7 @@
 					    </div>
 
 					    <div class="modal-body">
-						<table class="table">
+						<table class="table-responsive table">
 						    <tr>
 							<td>الاسم</td>
 							<td>{{ $relative->fullname }}</td>

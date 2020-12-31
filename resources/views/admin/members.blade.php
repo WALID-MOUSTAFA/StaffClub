@@ -9,10 +9,17 @@
 
 
     <div class="card">
+
 	
+	<div class="card-header  text-center">
+	    <p class="h3">	
+		الأعضاء
+	    </p>
+	</div>
+
 
 	<div class="card-body">
-
+	    
 	    
 	    @if(session()->has("success"))
 		<div class="alert alert-success alert-dismissible ">
@@ -28,17 +35,17 @@
 	    @endif
 
 	    
-	    <a href="/admin/members/add" class="btn btn-primary clearfix float-left">إضافة عضو
+	    <a href="/admin/members/add" class="d-block my-2 btn btn-primary float-left">إضافة عضو
 		<i class="fa fa-plus"></i>
-
 	    </a>
+	    
+	    <div class="clearfix"></div>
 
 	    
-	    <table class="table">
-		<thead>
+	    <table class="table-responsive table-responsive table">
+		<thead class="bg-primary">
 		    <th>الاسم الكامل</th>
 		    <th>الرقم القومي</th>
-		    <th>رقم الهاتف</th>
 		    <th>الكلية</th>
 		    <th>المسمى الوظيفي</th>
 		    <th>الحالة</th>
@@ -52,12 +59,11 @@
 			<tr>
 			    <td> <a href="/admin/members/{{$member->id}}"> {{ $member->fullname }} </a></td>
 			    <td> {{ $member->nat_id }}</td>
-			    <td> {{ $member->phone }}</td>
 			    <td> {{ $member->faculty }}</td>
 			    <td> {{ $member->designation }}</td>
 			    <td> {{ $member->status }}</td>
 
-			    <td>
+			    <td class="d-flex justify-content-between">
 				<a href="/admin/members/edit/{{ $member->id }}">
 				    <button class="btn btn-warning">
 					تعديل

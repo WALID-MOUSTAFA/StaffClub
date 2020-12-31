@@ -24,7 +24,8 @@ class FamilyRelativeController extends Controller
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=> "required|digits:14|unique:family_relatives",
+                        // "nat_id"=> "required|digits:14|unique:family_relatives",
+                        "nat_id"=> "required|digits:14",
                         "kinship"=>"required"
                 ]);
 
@@ -93,7 +94,8 @@ class FamilyRelativeController extends Controller
                                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        "nat_id"=> "required|digits:14|unique:family_relatives,nat_id,".$relative->id,
+                        // "nat_id"=> "required|digits:14|unique:family_relatives,nat_id,".$relative->id,
+                        "nat_id"=> "required|digits:14",
                         "kinship"=>"required"
                 ]);
 

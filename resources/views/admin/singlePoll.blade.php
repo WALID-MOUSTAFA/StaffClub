@@ -27,7 +27,7 @@
 		    </button>
 	    </a>
 
-	    <table class="table">
+	    <table class="table-responsive table">
 		<thead>
 		    <tr>
 			<th>السؤال</th>

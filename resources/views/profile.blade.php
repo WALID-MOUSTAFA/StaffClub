@@ -105,20 +105,21 @@
 				معلومات عامة
 			    </p>
 			    
-			    <table class="table contact-info-table">
+			    <table class="table-responsive table contact-info-table">
 				<tbody>
-
-				    <tr>
-					<td class="td-key">رقم الهاتف</td>
-					<td>{{ $user->phone }}</td>
-				    </tr>
-				    
-				    
 				    @if($user->email)
 				    <tr>
 					<td class="td-key">البريد الإلكتروني</td>
 					<td>{{ $user->email }}</td>
 				    </tr>
+				    @endif
+
+				    
+				    @if($user->nat_id)
+					<tr>
+					    <td class="td-key">الرقم القومي</td>
+					    <td>{{ $user->nat_id }}</td>
+					</tr>
 				    @endif
 
 				    <tr>
@@ -134,16 +135,26 @@
 					</tr>
 				    @endif
 
-				    @if($user->designation)
+				    @if($user->status)
 					<tr>
 					    <td class="td-key">الحالة</td>
 					    <td>{{ $user->status }}</td>
 					</tr>
 				    @endif
 
+
+				    @if($user->phone)
+					<tr>
+					<td class="td-key">رقم الهاتف</td>
+					<td>{{ $user->phone }}</td>
+				    </tr>
+				    @endif
 				    
 
-				   
+				    
+
+				    
+
 				    
 				</tbody>
 			    </table>
@@ -281,7 +292,7 @@
 							</div>
 
 							<div class="modal-body">
-							    <table class="table">
+							    <table class="table-responsive table">
 								<tr>
 								    <td>الاسم</td>
 								    <td>{{ $relative->fullname }}</td>
@@ -344,7 +355,7 @@
 					     </div>
 					-->
 					    <div class="">
-						<table class="table">
+						<table class="table-responsive table">
 						    <tr>
 							<td>  {{ $relative->fullname }} </td>
 						    </tr>
@@ -368,7 +379,7 @@
 
 						<form method="post" class="delete-relative-form form-inline" action="/delete-relative/ {{$relative->id }}">
 						    @csrf
-						    <button class="delete-relative btn btn-danger">
+						    <button class="delete-relative btn btn-danger submit-delete">
 							حذف
 							<i class="fa fa-trash-alt"></i>
 						    </button>
@@ -646,14 +657,19 @@
 	@endif
 
 
-	@if(session()->has("add-relative-success"))
-	    $.notify({
-	    message: 'dkjsdjsalkjlk' 
-	    },{
-	    type: 'success'
-	    });
-	@endif
+	<script>
+	 $("button.submit-delete").on("click", function(e) {
+	     e.preventDefault();
+	     var confirm_delete= confirm("هل أنت واثق من أنك تريد متابعة الحذف؟");
+	     if(confirm_delete) {
+		 $(this).closest("form").submit();
+	     }else {
+		 return false;
+	     } 
+	 });
 
+	</script>
+	
 	
     </body>
 

@@ -44,6 +44,8 @@
 			<a href="/polls/{{$poll->id}}">
 			    <p class="h3"> {{ $poll->title }}</p>
 			</a>
+			<p class="h5 text-secondary">{{$poll->desc }}</p>
+
 		    @endif
 		@endforeach
 	    </div>

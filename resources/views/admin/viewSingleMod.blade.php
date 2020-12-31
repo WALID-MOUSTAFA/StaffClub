@@ -25,7 +25,7 @@
 		<i class="fa fa-edit"></i>
 	    </a>
 	    
-	    <table class="table table-borderless">
+	    <table class="table-responsive table table-borderless">
 		<tr>
 		    <td>الاسم الكامل</td>
 		    <td> {{ $mod->fullname }}</td>

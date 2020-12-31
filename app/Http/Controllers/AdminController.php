@@ -57,7 +57,7 @@ class AdminController extends Controller
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
                         "nat_id"=>"required|digits:14|unique:members,nat_id,".$member->id,
-                        "phone"=>"required",
+                        // "phone"=>"required",
                         // "password"=> "required",
                         // "kinship"=>"required",
                         "gender"=> "required",
@@ -154,7 +154,7 @@ class AdminController extends Controller
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
                         "nat_id"=>"required|digits:14|unique:members",
-                        "phone"=>"required",
+                        // "phone"=>"required",
                         "password"=> "required",
                         // "kinship"=>"required",
                         "gender"=> "required",

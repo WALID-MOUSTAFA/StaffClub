@@ -17,7 +17,7 @@
 
 	    </div>
 
-	    <table class="table table-bordered">
+	    <table class="table-responsive table table-bordered">
 		<tbody>
 		    <tr>
 			<td>عدد الأسئلة</td>
@@ -33,7 +33,7 @@
 			<tr>
 			    <td>{{ $question->question_body }}</td>
 			    <td>
-				<table class="table table-borderless">
+				<table class="table-responsive table table-borderless">
 				    <tbody>
 					@foreach($question->options()->get() as $option)
 					    <tr>

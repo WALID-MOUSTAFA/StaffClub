@@ -62,7 +62,7 @@
 		</div>
 
 		<div class="input-wrapper">
-		    <label for="">المسمى الوظيفي</label>
+		    <label for="">الوظيفة</label>
 		    <input class="form-control" name="designation" type="text" value=""/>
 
 		</div>

@@ -35,7 +35,7 @@
 		    </button>
 		</a>
 
-		<table class="table">
+		<table class="table-responsive table">
 
 		<thead>
 		    <th>العنوان</th>
