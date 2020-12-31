@@ -32,15 +32,19 @@
 
 
 			 @if(isAnyPollsToVote())
-			 <a class=" my-1 mt-2 btn btn-warning slide-top" href="/polls">
-				 الاستبيانات
-			 </a>
+			     <li class="mx-2">
+				 <a class=" my-1 mt-2 btn btn-warning slide-top" href="/polls">
+				     الاستبيانات
+				 </a>
+			     </li>
 			 @endif
 			 
+			 <li>
 			 <a class="btn btn-danger" href="/logout">
 			     تسجيل الخروج
 			     <i class="fa fa-arrow-left"></i>
 			 </a>
+			 </li>
 		    </ul>
 		</div>
 

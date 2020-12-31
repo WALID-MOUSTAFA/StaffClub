@@ -20,23 +20,23 @@
     <body>
 
 	
-	<svg
-	    xmlns:dc="http://purl.org/dc/elements/1.1/"
-	    xmlns:cc="http://creativecommons.org/ns#"
-	    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	    xmlns:svg="http://www.w3.org/2000/svg"
-	    xmlns="http://www.w3.org/2000/svg"
-	    xmlns:xlink="http://www.w3.org/1999/xlink"
-	    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-	    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-	    viewBox="0 0 135.128 138.68401"
-		      version="1.1"
-	    id="svg8"
-	    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-	    sodipodi:docname="drawing.svg"
-	    inkscape:export-filename="/home/walid/drawing.png"
-	    inkscape:export-xdpi="96"
-	    inkscape:export-ydpi="96">
+	<svg class="d-none d-md-block"
+	     xmlns:dc="http://purl.org/dc/elements/1.1/"
+	     xmlns:cc="http://creativecommons.org/ns#"
+	     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	     xmlns:svg="http://www.w3.org/2000/svg"
+	     xmlns="http://www.w3.org/2000/svg"
+	     xmlns:xlink="http://www.w3.org/1999/xlink"
+	     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+	     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+	     viewBox="0 0 135.128 138.68401"
+	     version="1.1"
+	     id="svg8"
+	     inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+	     sodipodi:docname="drawing.svg"
+	     inkscape:export-filename="/home/walid/drawing.png"
+	     inkscape:export-xdpi="96"
+	     inkscape:export-ydpi="96">
 	    <defs
 		id="defs2">
 		<linearGradient

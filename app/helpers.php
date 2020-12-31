@@ -1,6 +1,26 @@
 <?php
 
 
+function isModLogin() {
+        
+        $role= session()->get("login_role");
+        if($role != "mod") {
+                return false;
+        }
+        return true;
+}
+
+
+function isMemberLogin() {
+        
+        $role= session()->get("login_role");
+        if($role != "member") {
+                return false;
+        }
+        return true;
+}
+
+
 
 
 function activePolls() {
