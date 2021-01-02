@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get("/uploads/{id}", function($id=null){
+    if (!file_exists(storage_path()."/app/uploads/".$id)) {
+        return response()->json(["status" => "error", 'message'=>"file dosn't exist"])->setStatusCode(404);
+    }
+    return response()->file(storage_path(). "/app/uploads/" .$id);
+});
+
+
+
 
 Route::get("/", "\App\Http\Controllers\HomeController@index");
 
