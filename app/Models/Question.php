@@ -9,7 +9,7 @@ class Question extends Model
 {
     use HasFactory;
 
-        protected string $question_body; 
+        protected  $question_body; 
 
         protected $fillable = [
                 "question_body"

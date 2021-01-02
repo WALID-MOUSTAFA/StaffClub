@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
-        protected string $option_body;
+        protected  $option_body;
 
         protected $fillable = [
                 "option_body"

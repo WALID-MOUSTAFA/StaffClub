@@ -9,8 +9,8 @@ class Poll extends Model
 {
     use HasFactory;
 
-        protected string $title;
-        protected string $desc;
+        protected  $title;
+        protected  $desc;
         protected  $active;
 
 
