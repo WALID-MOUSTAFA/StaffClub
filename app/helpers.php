@@ -77,6 +77,8 @@ function deletePicFromDisk($pic) {
                         return true;
                 }
         }
+
+        return false;
 }
 
 

@@ -184,7 +184,11 @@ class ModsController extends Controller
                                 return back()->withErrors($validator)
                                              ->withInput();
                         }
-                        
+
+                        if($mod->pic != null) {
+                                deletePicFromDisk($mod->pic);
+                        }
+
                         $name= $pic->store("uploads");
                         $name=substr($name, strlen("uploads/"));
                         $pic=$name;
@@ -212,10 +216,15 @@ class ModsController extends Controller
 
         }
 
-
+        
         public function postDeleteMod($id) {
                 $mod = \App\Models\Mod::find($id);
+                $pic=$mod->pic;
                 if($mod->delete()) {
+                        if($pic != null) {
+                                deletePicFromDisk($pic);
+                        }
+
                         session()->flash("success", "تم حذف المشرف بنجاح");
                         return redirect("admin/mods");
                 }else {

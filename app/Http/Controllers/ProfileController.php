@@ -81,9 +81,9 @@ class ProfileController extends Controller
                 if(request()->has("password") && request()->get("password") != null){
                         $current_user->password= request()->get("password");
                 }
-                if(request()->get("designation") != null) {
-                        $member->designation = request()->get("designation");
-                }
+                // if(request()->get("designation") != null) {
+                //         $current_user->designation = request()->get("designation");
+                // }
 
                 if(request()->hasFile("pic") && request()->file("pic") != null) {
                         $pic= "";
@@ -95,6 +95,12 @@ class ProfileController extends Controller
                                 return redirect("/profile") ->withErrors($validator)
                                                             ->withInput();
                         }
+
+                        if($member->pic != null) {
+                                deletePicFromDisk($member->pic);
+                        }
+
+
 
                         $name= $pic->store("uploads");
                         $name=substr($name, strlen("uploads/"));

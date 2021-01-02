@@ -84,7 +84,13 @@ class AdminController extends Controller
                                 return back() ->withErrors($validator)
                                                             ->withInput();
                         }
+                        
+                        
+                        if($member->pic != null) {
+                                deletePicFromDisk($member->pic);
+                        }
 
+                        
                         $name= $pic->store("uploads");
                         $name=substr($name, strlen("uploads/"));
                         $pic=$name;
