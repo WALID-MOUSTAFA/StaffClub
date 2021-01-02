@@ -64,7 +64,7 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
 
 
-x        Route::get("/logout", "App\Http\Controllers\LoginController@logout")
+        Route::get("/logout", "App\Http\Controllers\LoginController@logout")
                 ->middleware("checkMemberLogin");
 
         //////////////////////////////////////////////////////
