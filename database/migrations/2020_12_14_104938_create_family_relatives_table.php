@@ -18,7 +18,7 @@ class CreateFamilyRelativesTable extends Migration
             $table->timestamps();
             $table->string("nat_id", 14)->nullable();
             $table->string("fullname", 1000);
-            $table->enum("gender", ["male", "female"]);
+            $table->enum("gender", ["male", "female"])->nullable();
             $table->double("age", 10, 2)->nullable();
             $table->text("pic")->nullable();
             $table->unsignedBigInteger("member_id");
