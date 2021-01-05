@@ -97,7 +97,7 @@ class ProfileController extends Controller
                         }
 
                         if($current_user->pic != null) {
-                                deletePicFromDisk($member->pic);
+                                deletePicFromDisk($current_user->pic);
                         }
 
 
