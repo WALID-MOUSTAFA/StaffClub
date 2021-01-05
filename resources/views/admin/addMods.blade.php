@@ -51,7 +51,20 @@
 		<label for="">كلمة السر</label>
 		<input class="form-control" name="password" type="password" value=""/>
 	    </div>
+
 	    
+	    
+	    <div class="input-wrapper">
+		<label for="">الرتبة</label>
+
+		<select name="role" class="custom-select">
+		    <option value="1">مدير</option>
+		    <option value="2" >مشرف</option>
+		    <option value="3" >ريسبشن/اخرى</option>
+
+		</select>
+	    </div>
+
 	    
 	    <div class="input-wrapper">
 		<label for="">الجنس</label>

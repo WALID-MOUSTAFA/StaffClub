@@ -35,7 +35,10 @@ left: 100px;
         </div>
 
 
-	<div class="col-lg-3 col-6">
+	@if(!isAllowed(["admin", "normal_mod"]))
+	@else
+
+	    <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-primary">
 		<div class="inner">
@@ -48,10 +51,13 @@ left: 100px;
 		</div>
 		<a href="/admin/polls" class="small-box-footer">المزيد <i class="fas fa-arrow-circle-left"></i></a>
             </div>
-        </div>
+            </div>
+	@endif
 
-	
-	<div class="col-lg-3 col-6">
+	    @if(!isAllowed(["admin", "normal_mod"]))
+	    @else
+
+		<div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
 		<div class="inner">
@@ -64,8 +70,8 @@ left: 100px;
 		</div>
 		<a href="/admin/mods" class="small-box-footer">المزيد <i class="fas fa-arrow-circle-left"></i></a>
             </div>
-        </div>
-
+		</div>
+		@endif
 
 
     </div>

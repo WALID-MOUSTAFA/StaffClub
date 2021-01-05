@@ -24,6 +24,7 @@ class AdminController extends Controller
 
         public function viewSingleMember($id) {
                 
+                
                 $member= \App\Models\Member::find($id);
                 $kinships= \App\Models\Kinship::all();
                 return view("admin/singleMember")->with([
@@ -34,14 +35,22 @@ class AdminController extends Controller
 
 
         public function getEditSingleMember($id) {
+                if(!isAllowed(["admin", "normal_mod"])){
+                        return back();
+                }
+
                 $member= \App\Models\Member::find($id);
                 return view("admin/editSingleMember")->with(["member"=>$member]);
         }
         
 
         
-        public function postEditSingleMember($id) {
-
+        public function postEditSingleMember($id)
+        {
+                if(!isAllowed(["admin", "normal_mod"])){
+                        return back();
+                }
+                
                 $requestData= request()->all();
                 if(request()->has("nat_id")){
                         $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
@@ -141,6 +150,7 @@ class AdminController extends Controller
 
         
         public function getAddMember() {
+                
                 return view("admin/addMember");
         } 
 
@@ -148,7 +158,8 @@ class AdminController extends Controller
         //TODO(walid): it's too late, finish the validator later;
         public function postAddMember()
         {
-                                
+
+
                 $requestData= request()->all();
                 $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
                 if(request()->has("password")){

@@ -1,7 +1,42 @@
 <?php
 
 
-function isModLogin() {
+function isAllowed($roles)
+{
+        $current_user = session()->get("user");
+        $available_roles = ["admin", "normal_mod", "reception"];
+
+        if($current_user == null){
+                return false;
+        }
+        
+        foreach($roles as $index=>$role) {
+
+                if(!in_array($role, $available_roles)){
+                        return false;
+                }
+                //replace string roles with numeric, makes it easier to handle and compare; 
+                if($role == "admin") {
+                        $roles = array_replace($roles, [$index=>"1"]);
+                }else if($role == "normal_mod") {
+                        $roles = array_replace($roles, [$index=>"2"]);
+                }else if($role == "reception") {
+                       $roles =  array_replace($roles, [$index=>"3"]);
+                }
+
+                
+        }
+        
+        if(in_array($current_user->role, $roles)) {
+                return true; 
+        }
+
+        return false;        
+} 
+
+
+function isModLogin()
+{
         
         $role= session()->get("login_role");
         if($role != "mod") {
@@ -11,7 +46,8 @@ function isModLogin() {
 }
 
 
-function isMemberLogin() {
+function isMemberLogin()
+{
         
         $role= session()->get("login_role");
         if($role != "member") {
@@ -23,13 +59,15 @@ function isMemberLogin() {
 
 
 
-function activePolls() {
+function activePolls()
+{
         $polls= \App\Models\Poll::where("active", "=", "1")->get();
         return $polls;
 }
 
 
-function memberAllowedToVote($member, $poll) {
+function memberAllowedToVote($member, $poll)
+{
         $poll_voter= \App\Models\PollVoters::where([["member_id", "=", $member->id], ["poll_id", "=", $poll->id]])->get();
         if(count($poll_voter) > 0) {
                 return false;
@@ -39,7 +77,8 @@ function memberAllowedToVote($member, $poll) {
 } 
 
 
-function isAnyPollsToVote() {
+function isAnyPollsToVote()
+{
         $active_polls= activePolls();
         if(count($active_polls) > 0) {
                 foreach($active_polls as $poll) {
@@ -55,7 +94,8 @@ function isAnyPollsToVote() {
 } 
 
 
-function fromEasternArabicToWestern($str) {
+function fromEasternArabicToWestern($str)
+{
         $western_arabic = array('0','1','2','3','4','5','6','7','8','9');
         $eastern_arabic = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
         
@@ -67,7 +107,8 @@ function fromEasternArabicToWestern($str) {
 
 
 
-function deletePicFromDisk($pic) {
+function deletePicFromDisk($pic)
+{
         if($pic == "default.jpg") {
                 return false;
         } 
@@ -84,7 +125,8 @@ function deletePicFromDisk($pic) {
 
 
 
-function getTitleSlug($title, $required_slug) {
+function getTitleSlug($title, $required_slug)
+{
         $slug = explode("-", $title)[0];
         if($slug == $required_slug) {
                 return "active";

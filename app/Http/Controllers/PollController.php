@@ -11,8 +11,16 @@ use Illuminate\Support\Facades\Validator;
 class PollController extends Controller
 {
 
+        public function __construct()
+        {
+                if(!isAllowed(["admin", "normal_mod"])){
+                        return back();
+                }
 
-        public function index() {
+        } 
+        
+        public function index()
+        {
 
                 $polls= \App\Models\Poll::all();
                 
@@ -25,7 +33,8 @@ class PollController extends Controller
 
 
 
-        public function viewSinglePoll($id) {
+        public function viewSinglePoll($id)
+        {
 
                 $poll= \App\Models\Poll::find($id);
                 return view("admin/singlePoll")->with([
@@ -33,12 +42,14 @@ class PollController extends Controller
                 ]);
         }
 
-        public function getAddSinglePoll() {
+        public function getAddSinglePoll()
+        {
                 return view("admin/addSinglePoll");
         }
 
         
-        public function postAddSinglePoll() {
+        public function postAddSinglePoll()
+        {
 
 
                 $validator = Validator::make(request()->all(), [
@@ -64,7 +75,8 @@ class PollController extends Controller
         }
 
         
-        public function getEditSinglePoll($id) {
+        public function getEditSinglePoll($id)
+        {
                 $poll = \App\Models\Poll::find($id);
                 return view("admin/editSinglePoll")->with([
                         "poll"=>$poll
@@ -73,7 +85,8 @@ class PollController extends Controller
         }
 
 
-        public function postEditSinglePoll($id) {
+        public function postEditSinglePoll($id)
+        {
 
                 // dd(request()->all());
                 $poll = \App\Models\Poll::find($id);
@@ -106,7 +119,8 @@ class PollController extends Controller
         }
 
 
-        public function postDeleteSinglePoll($id) {
+        public function postDeleteSinglePoll($id)
+        {
                 $poll= \App\Models\Poll::find($id);
                 if($poll->delete()) {
                          session()->flash("success", "تم الحذف بنجاح");
@@ -122,12 +136,14 @@ class PollController extends Controller
 
         
         
-        public function getAddQuestion($id) {
+        public function getAddQuestion($id)
+        {
                 $poll = \App\Models\Poll::find($id);
                 return view("admin/addSingleQuestion")->with(["poll"=>$poll]);
         }
 
-        public function postAddQuestion($id) {
+        public function postAddQuestion($id)
+        {
                 $poll= \App\Models\Poll::find($id);
                 $options=[];
                 $question= new \App\Models\Question();
@@ -171,14 +187,16 @@ class PollController extends Controller
 
 
 
-        public function getEditQuestion($id) {
+        public function getEditQuestion($id)
+        {
                 $question = \App\Models\Question::find($id);
                 return view("admin/editSingleQuestion")->with([
                         "question" => $question
                 ]);
         }
 
-        public function postEditQuestion($id) {
+        public function postEditQuestion($id)
+        {
                 $question = \App\Models\Question::find($id);
                 $options= [];
 
@@ -221,7 +239,8 @@ class PollController extends Controller
 
 
 
-        public function postDeleteQuestion($id) {
+        public function postDeleteQuestion($id)
+        {
                 $question = \App\Models\Question::find($id);
                 $question->delete();
                 return back();
@@ -231,15 +250,17 @@ class PollController extends Controller
 
         //// reports /////
         
-        public function singlePollReport($id) {
-                $poll = \App\Models\Poll::find($id);
+        public function singlePollReport($id)
+        {
+                
+                $poll = \App\Models\Poll::with("questions", "questions.options", "questions.options.answers")->find($id);
                 $voters= \App\Models\PollVoters::where("poll_id","=",$id)->get();
-                $questions = $poll->questions()->get();
+                $questions = $poll->questions;
                 
                 
                 return view("admin/singlePollReport")->with([
                         "poll"=>$poll,
-                        "qcount" => count($poll->questions()->get()),
+                        "qcount" => count($poll->questions),
                         "num_of_voters" => count($voters),
                 ]);
         }  

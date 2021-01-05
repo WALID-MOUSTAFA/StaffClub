@@ -67,7 +67,7 @@ class ModsController extends Controller
 
         
         public function allMods() {
-
+                
                 $mods= \App\Models\Mod::all();
                 return view("admin/mods")->with(["mods"=>$mods]);
         }
@@ -83,12 +83,23 @@ class ModsController extends Controller
         
         
         public function getAddMod() {
+                if(!isAllowed(["admin"])) {
+                        return back();
+                } 
+
+
                 return view("admin/addMods");
                 
         } 
         
         
         public function postAddMod() {
+                if(!isAllowed(["admin"])) {
+                        return back();
+                } 
+
+
+                
                 $mod= new \App\Models\Mod();
 
                 $requestData= request()->all();
@@ -103,7 +114,8 @@ class ModsController extends Controller
                         "fullname" => "required:digits",
                         "nat_id"=> "required|digits:14|unique:mods",
                         "password"=> "required",
-                        "gender" => "required"
+                        "gender" => "required",
+                        "role" => "required"
                 ]);
 
                 if($validator->fails()) {
@@ -132,7 +144,8 @@ class ModsController extends Controller
                 $mod->password= request()->get("password");
                 $mod->gender= request()->get("gender");
                 $mod->phone= request()->get("phone");
-                
+                $mod->role = request()->get("role");
+                        
                 if($mod->save()) {
                         session()->flash("success", "تم إضافة المشرف بنجاح");
                         return redirect("admin/mods");
@@ -146,6 +159,11 @@ class ModsController extends Controller
 
 
         public function getEditMod($id) {
+
+                if(!isAllowed(["admin"]) && session()->get("user")->id != $id ) {
+                        return back();
+                }
+
                 $mod = \App\Models\Mod::find($id);
                 return view("admin/editMods")->with([
                         "mod"=>$mod
@@ -154,6 +172,12 @@ class ModsController extends Controller
         
 
         public function postEditMod($id) {
+                
+                if(!isAllowed(["admin"]) && session()->get("user")->id != $id ) {
+                        return back();
+                }
+
+                
                 $mod = \App\Models\Mod::find($id);
 
                 $requestData= request()->all();
@@ -163,12 +187,12 @@ class ModsController extends Controller
                 }
                 request()->replace($requestData);
 
-                
                 $validator = Validator::make(request()->all(),[
                         "fullname" => "required:digits",
                         "nat_id"=> "required|digits:14|unique:mods,nat_id,".$mod->id,
                         // "password"=> "required",
-                        "gender" => "required"
+                        "gender" => "required",
+                        // "role"=>"required"
                 ]);
 
                 if($validator->fails()) {
@@ -204,6 +228,11 @@ class ModsController extends Controller
                 }
                 $mod->gender= request()->get("gender");
                 $mod->phone= request()->get("phone");
+
+
+                if(isAllowed(["admin"])){
+                                $mod->role = request()->get("role");
+                }
                 $mod->logout = 1;
                 if($mod->save()) {
                         session()->flash("success", "تم تعديل المشرف بنجاح");

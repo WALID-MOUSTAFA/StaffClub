@@ -34,10 +34,13 @@
 		</div>
 	    @endif
 
-	    
-	    <a href="/admin/members/add" class="d-block my-2 btn btn-primary float-left">إضافة عضو
-		<i class="fa fa-plus"></i>
-	    </a>
+	    @if(!isAllowed(["admin", "normal_mod"]))
+	    @else
+		<a href="/admin/members/add" class="d-block my-2 btn btn-primary float-left">إضافة عضو
+		    <i class="fa fa-plus"></i>
+		</a>
+	    @endif
+		
 	    
 	    <div class="clearfix"></div>
 
@@ -50,8 +53,10 @@
 		    <th>المسمى الوظيفي</th>
 		    <th>الحالة</th>
 
-		    <th>خيارات</th>
-
+		    @if(!isAllowed(["admin", "normal_mod"]))
+		    @else
+			<th>خيارات</th>
+		    @endif
 		</thead>
 		
 		<tbody>
@@ -64,20 +69,30 @@
 			    <td> {{ $member->status }}</td>
 
 			    <td class="d-flex justify-content-between">
-				<a href="/admin/members/edit/{{ $member->id }}">
+
+				@if(!isAllowed(["admin", "normal_mod"]))
+				@else
+				    <a href="/admin/members/edit/{{ $member->id }}">
 				    <button class="btn btn-warning">
 					تعديل
 					<i class="fa fa-edit"></i>
 
 				    </button>
-				</a>
-				<form class="d-inline" method="post" action="/admin/members/delete/{{$member->id }}">
-				    @csrf
-				    <button type="submit" class="submit-delete btn btn-danger">
-					حذف
+				    </a>
+				@endif
+				    
+				    @if(!isAllowed(["admin", "normal_mod"]))
+				    @else
+					
+					<form class="d-inline" method="post" action="/admin/members/delete/{{$member->id }}">
+					    @csrf
+					    <button type="submit" class="submit-delete btn btn-danger">
+						حذف
 					<i class="fa fa-trash"></i>
-				    </button>
-				</form>
+					    </button>
+					</form>
+				    @endif
+				    
 			    </td>
 			</tr>
 		    @endforeach

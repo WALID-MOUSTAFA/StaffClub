@@ -53,6 +53,19 @@
 	    </div>
 	    
 	    
+	    @if(isAllowed(["admin"]))
+		<div class="input-wrapper">
+		<label for="">الرتبة</label>
+
+		<select name="role" class="custom-select">
+		    <option {{ $mod->role=="1"? "selected" : "" }} value="1">مدير</option>
+		    <option  {{ $mod->role=="2"? "selected" : "" }} value="2" >مشرف</option>
+		    <option  {{ $mod->role=="3"? "selected" : "" }} value="3" >ريسبشن/اخرى</option>
+
+		</select>
+	    </div>
+	    @endif
+	    
 	    <div class="input-wrapper">
 		<label for="">الجنس</label>
 		<select name="gender" class="custom-select">

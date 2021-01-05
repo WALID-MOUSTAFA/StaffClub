@@ -25,6 +25,8 @@ class CreateModsTable extends Migration
             $table->string("password", 1000); 
             $table->boolean("logout")->default(false);
             $table->string("pic")->nullable()->default("default.jpg");
+            //NOTE(walid): 1 ==> manager  , 2 ==> normal moderator , 3 ==> reception
+            $table->integer("role")->default(2);
         });
     }
 

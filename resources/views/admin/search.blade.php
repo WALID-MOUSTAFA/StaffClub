@@ -33,14 +33,17 @@
 		<th>الحالة</th>
 
 		<th>الأقارب</th>
-		<th>خيارات</th>
-
+		@if(!isAllowed(["admin", "normal_mod"]))
+		@else
+		    <th>خيارات</th>
+		@endif
+		
 	    </thead>
 	    
 	    <tbody>
 		@foreach($members as $member)
 		    <tr>
-			<td> {{ $member->fullname }}</td>
+			<td> <a href="/admin/members/{{$member->id}}">{{ $member->fullname }} </a></td>
 			<td> {{ $member->nat_id}}</td>
 			<td> {{ $member->faculty }}</td>
 			<td> {{ $member->designation }}</td>
@@ -52,16 +55,14 @@
 			    @endforeach
 			</ul></td>
 			<td class="d-flex">
-			    <a href="/admin/members/{{ $member->id }}">
-				<button class="btn btn-primary">عرض
-				    <i class="fa fa-external-link-alt"></i>
-				</button>
-			    </a>
-			    <a href="/admin/members/edit/{{ $member->id }}">
-				<button class="btn btn-warning">تعديل
-				    <i class="fa fa-edit"></i>
-				</button>
-			    </a>
+			    @if(!isAllowed(["admin", "normal_mod"]))
+			    @else
+				<a href="/admin/members/edit/{{ $member->id }}">
+				    <button class="btn btn-warning">تعديل
+					<i class="fa fa-edit"></i>
+				    </button>
+				</a>
+			    @endif
 			</td>
 		    </tr>
 		@endforeach

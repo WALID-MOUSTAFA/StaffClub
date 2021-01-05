@@ -20,10 +20,18 @@
 	
 	<div class="card-body clearfix">
 	    
-	    <a class="btn btn-warning float-left" href="/admin/mods/edit/{{$mod->id }}">
-		تعديل
-		<i class="fa fa-edit"></i>
-	    </a>
+
+	    @if(!isAllowed(["admin"]) && session()->get("user")->id != $mod->id )
+		<a class="btn btn-warning disabled float-left" href="/admin/mods/edit/{{$mod->id }}">
+		    تعديل
+		    <i class="fa fa-edit"></i>
+		</a>
+	    @else
+		<a class="btn btn-warning float-left" href="/admin/mods/edit/{{$mod->id }}">
+		    تعديل
+		    <i class="fa fa-edit"></i>
+		</a>
+	    @endif
 	    
 	    <table class="table-responsive table table-borderless">
 		<tr>
