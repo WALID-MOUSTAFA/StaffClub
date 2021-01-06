@@ -17,8 +17,9 @@ class CreatePollsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string("title");
+            $table->string("title", 5000);
             $table->text("desc");
+            $table->string("allowedVoters", 5000)->nullable();
             $table->boolean("active")->default(false);
 
         });

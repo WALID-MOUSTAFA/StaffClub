@@ -47,15 +47,23 @@ class PollController extends Controller
                 return view("admin/addSinglePoll");
         }
 
+
+        private function allowedVotersArrToStr($allowed_voters)
+        {
+                $votersArrToStr= implode(",", $allowed_voters);
+                return $votersArrToStr;
+        } 
         
         public function postAddSinglePoll()
         {
 
-
                 $validator = Validator::make(request()->all(), [
                         "title"=> "required",
-                        "desc" => "required"
-                ], [], ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
+                        "desc" => "required",
+                        "allowed"=> "required"
+                ], ["allowed.required"=> "يجب تحديد من يستطيع رؤية الاستبيان!"],
+                                            ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
+
 
                 if($validator->fails()) {
                         return back()->withErrors($validator)->withInput();
@@ -64,6 +72,8 @@ class PollController extends Controller
                 $poll= new \App\Models\Poll();
                 $poll->title= request()->get("title");
                 $poll->desc= request()->get("desc");
+                $poll->allowedVoters = $this->allowedVotersArrToStr(request()->get("allowed"));
+
                 if($poll->save()) {
                         session()->flash("success", "تم إضافة الاستبيان بنجاح، يمكنك الآن إضافة الاسئلة كما تشاء");
                         return redirect("/admin/polls");
@@ -87,20 +97,20 @@ class PollController extends Controller
 
         public function postEditSinglePoll($id)
         {
-
-                // dd(request()->all());
                 $poll = \App\Models\Poll::find($id);
                 $validator= Validator::make(request()->all(), [
                         "title" => "required",
                         "desc" => "required",
-                ],[], ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
+                        "allowed"=>"required"
+                ],["allowed.required"=> "يجب تحديد من يستطيع رؤية الاستبيان!"],
+                                            ["title"=> '"العنوان"', 'desc'=>'"الوصف"']);
                 if($validator->fails()) {
                         return back()->withErrors($validator);
-
                 }
 
                 $poll->title= request()->get("title");
                 $poll->desc= request()->get("desc");
+
                 if(request()->has("active")){
                         if(request()->get("active") == "on"){
                                 $poll->active = 1;
@@ -111,6 +121,9 @@ class PollController extends Controller
                         $poll->active = 0;
                 }
 
+                $poll->allowedVoters = $this->allowedVotersArrToStr(request()->get("allowed"));
+
+                
                 if($poll->save()) {
                         session()->flash("success", "تم تعديل الاستبيان");
                         return redirect("/admin/polls");

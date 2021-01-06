@@ -66,13 +66,31 @@ function activePolls()
 }
 
 
+function pollVisibleToMember($member, $poll) {
+        //Note(walid): those designation are always allowed to vote;
+        if(!str_contains($member->designation, "رئيس الجامعة")){
+                $allowedVotersArr = explode(",", $poll->allowedVoters);
+
+                if(in_array( "استاذ" , $allowedVotersArr)){
+                        array_push($allowedVotersArr, "أستاذ"); //NOTE(walid): easy way to deal with hamza; 
+                }
+                foreach($allowedVotersArr as $a) {
+                        if(str_contains($member->designation, $a)) {
+                                return true;
+                        } 
+                }
+                return false;
+        }
+} 
+
 function memberAllowedToVote($member, $poll)
 {
+        
         $poll_voter= \App\Models\PollVoters::where([["member_id", "=", $member->id], ["poll_id", "=", $poll->id]])->get();
         if(count($poll_voter) > 0) {
-                return false;
+                return false && pollVisibleToMember($member, $poll);
         }else {
-                return true;
+                return true && pollVisibleToMember($member, $poll);
         } 
 } 
 

@@ -13,11 +13,11 @@
     <div class="polls-wrapper">
 
 	<div class="card ">
-	    <!-- <div class="card-header">
-		 <p class="h1 text-center">{{ $poll-> title }}
-		 </p>
-		 </div>
-	    -->
+	    <div class="card-header">
+		<p class="h1 text-center">{{ $poll-> title }}
+		</p>
+	    </div>
+	    
 
 	    <div class="card-body ">
 		

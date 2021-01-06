@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -29,8 +30,10 @@ class ProfileController extends Controller
 
         public function editMember($id)
         {
-                
+
+                $current_user= session()->get("user");
                 $current_member_id= session()->get("user")->id;
+
                 if($current_member_id != $id) {
                         return "error";
                 }
@@ -49,12 +52,15 @@ class ProfileController extends Controller
 
                 
                 $validator= Validator::make(request()->all(), [
-                        // "fullname"=> "required",
-                        // "phone"=>"required",
-                        // "kinship"=>"required",
-                        // "gender"=> "required",
-                        // "faculty"=>"required",
-                ]);
+                        "phone"=>  Rule::requiredIf($current_user->password == null),
+                        "password"=> Rule::requiredIf($current_user->password == null),
+                        "pic"=> Rule::requiredIf($current_user->password == null),
+                ], ["pic.required"=> "الصورة مطلوبة"],[]);
+                
+                
+
+                
+                
 
                 
                 if($validator->fails()) {
@@ -64,7 +70,6 @@ class ProfileController extends Controller
                         
                 }
                 
-                $current_user= session()->get("user");
                 // $current_user->fullname= request()->get("fullname");
 
                 if(request()->has("phone") && request()->get("phone") != null){

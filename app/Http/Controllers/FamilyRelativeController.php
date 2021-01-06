@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class FamilyRelativeController extends Controller
 {
@@ -19,15 +21,15 @@ class FamilyRelativeController extends Controller
                         $requestData["nat_id"]  = fromEasternArabicToWestern($requestData["nat_id"]);
                 }
                 request()->replace($requestData);
-
+                
 
                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        // "nat_id"=> "required|digits:14|unique:family_relatives",
                         "nat_id"=> "required|digits:14",
-                        "kinship"=>"required"
-                ]);
+                        "kinship"=>"required",
+                        "pic" => "required"
+                ], ["pic.required" => "الصورة مطلوبة"],[]);
 
                 if($validator->fails()) {
                         session()->flash("add-relative-errors");
@@ -94,10 +96,10 @@ class FamilyRelativeController extends Controller
                                 
                 $validator= Validator::make(request()->all(), [
                         "fullname"=> "required",
-                        // "nat_id"=> "required|digits:14|unique:family_relatives,nat_id,".$relative->id,
                         "nat_id"=> "required|digits:14",
-                        "kinship"=>"required"
-                ]);
+                        "kinship"=>"required",
+                        "pic" => Rule::requiredIf($relative->pic == null),
+                ],["pic.required" => "الصورة مطلوبة"],[]);
 
                 if($validator->fails()) {
                         session()->flash("edit-relative-errors");
@@ -156,8 +158,8 @@ class FamilyRelativeController extends Controller
                 $relative -> kinship()->associate($kinship);
                 
                 if($relative->save()) {
-                        session()->flash("edit-relative-success",
-                                         ["تم التعديل بنجاح"]
+                        session()->flash("success",
+                                         "تم التعديل بنجاح"
                         );
                         return back();
                 }

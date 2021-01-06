@@ -86,6 +86,7 @@
 			
 			@if(session()->has("success"))
 			    <div class="alert alert-success alert-dismissible ">
+				<span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
 				{{ session()->get("success") }}
 			    </div>
 			@endif

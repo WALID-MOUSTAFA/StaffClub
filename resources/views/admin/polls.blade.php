@@ -10,8 +10,15 @@
 
     
     <div class="polls-wrapper">
-
+	
 	<div class="card">
+
+	    
+	    <div class="mb-4 text-center card-header bg-primary">
+		<p class="h3">
+		    الاستبيانات
+		</p>
+	    </div>
 
 	    
 	    @if(session()->has("success"))
@@ -35,15 +42,16 @@
 		    </button>
 		</a>
 
-		<table class="table-responsive table">
+		<table class="table-responsive table text-center">
 
 		<thead>
 		    <th>العنوان</th>
 		    <th>الوصف</th>
 		    <th>مفعّل</th>
+		    <th>المسموح لهم بالتصويت</th>
 		    <th>خيارات</th>
 		</thead>
-
+		
 		@foreach($polls as $poll)
 		    <tr>
 			<td><a href="/admin/polls/{{$poll->id}}">{{ $poll->title }}</a></td>
@@ -54,6 +62,15 @@
 			    @else
 				<span class="text-danger">غير مفعّل</span>
 			    @endif
+			</td>
+			<td>
+			    <ul>
+				@foreach(explode(",", $poll->allowedVoters) as $allowedVoter)
+				    <li>
+					{{ $allowedVoter }}
+				    </li>
+				@endforeach
+			    </ul>
 			</td>
 			<td>
 			    <div>

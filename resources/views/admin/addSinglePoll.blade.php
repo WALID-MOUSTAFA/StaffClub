@@ -34,14 +34,41 @@
 		    @csrf
 		    <div class="input-wrapper">
 			<label for="">عنوان الاستبيان</label>
-			<input class="form-control" name="title" type="text" value=""/>
+			<input class="form-control" name="title" type="text" value="{{old("title")}}"/>
 		    </div>
 
 		    <div class="input-wrapper">
 			<label for="">الوصف</label>
-
-			<textarea class="form-control" cols="30" id="" name="desc" rows="10"></textarea>
+			<textarea class="form-control" cols="30" id="" name="desc" rows="10">{{old("desc")}}</textarea>
 		    </div>
+
+		    <div class="allow-vote my-2">
+
+			<p>من يستطيع رؤية الاستبيان، وله حق التصويت؟</p>
+			
+			<div class="form-check">
+			    <input name="allowed[]" class="form-check-input" type="checkbox" value="معيد" id="">
+			    <label class="form-check-label" for="">
+				معيد
+			    </label>
+			</div>
+
+			<div class="form-check">
+			    <input name="allowed[]" class="form-check-input" type="checkbox" value="مدرس" id="">
+			    <label class="form-check-label" for="">
+				مدرس
+			    </label>
+			</div>
+
+			
+			<div class="form-check">
+			    <input name="allowed[]" class="form-check-input" type="checkbox" value="استاذ" id="">
+			    <label class="form-check-label" for="">
+				استاذ
+			    </label>
+			</div>
+		    </div>
+
 
 		    <button class="btn btn-success btn-block">إضافة
 			<i class="fa fa-plus"></i>

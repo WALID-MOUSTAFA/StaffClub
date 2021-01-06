@@ -11,7 +11,7 @@
     <div class="card">
 
 	
-	<div class="card-header  text-center">
+	<div class="card-header bg-primary text-center">
 	    <p class="h3">	
 		الأعضاء
 	    </p>
@@ -46,7 +46,7 @@
 
 	    
 	    <table class="table-responsive table-responsive table">
-		<thead class="bg-primary">
+		<thead class="bg-secondary">
 		    <th>الاسم الكامل</th>
 		    <th>الرقم القومي</th>
 		    <th>الكلية</th>
