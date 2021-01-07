@@ -4,8 +4,9 @@
         <meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>الاستبيانات -  {{ config("app.name") }} </title>
-
+	
 	<link rel="stylesheet" href="{{ asset("/css/bootstraprtl.min.css") }}">
+	<link rel="stylesheet" href="{{ asset('css/adminlte3/plugins/fontawesome-free/css/all.min.css')}}">
 
 	<link href="{{asset("/css/profile.css")}}" rel="stylesheet"/>
 	<link href="{{ asset('/css/takePoll.css') }}" rel="stylesheet"/>
@@ -29,6 +30,7 @@
 
 			<a href="/profile" id="" class="mx-1 my-1 btn btn-primary">
 			    الرجوع
+			    <i class="fa fa-arrow-left"></i>
 			</a>
 		    </ul>
 		</div>
@@ -107,7 +109,7 @@
 		     }
 		 },
 		 error: function(req, status, error) {
-		     
+		     console.log("error");
 		 } 
 		 
 	     });

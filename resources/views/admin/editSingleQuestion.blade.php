@@ -60,7 +60,8 @@
 		</ul>
 		
 
-		<button id="submit-edit" class="btn btn-warning btn-block">تعديل
+		<button id="submit-edit" class="btn btn-warning btn-block">
+		    حفظ التعديل
 		    <i class="fa fa-edit"></i>
 		</button>
 	    </form>

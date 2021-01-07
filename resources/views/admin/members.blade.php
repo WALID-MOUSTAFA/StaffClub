@@ -72,7 +72,7 @@
 
 				@if(!isAllowed(["admin", "normal_mod"]))
 				@else
-				    <a href="/admin/members/edit/{{ $member->id }}">
+				    <a class="mx-2" href="/admin/members/edit/{{ $member->id }}">
 				    <button class="btn btn-warning">
 					تعديل
 					<i class="fa fa-edit"></i>
@@ -81,7 +81,7 @@
 				    </a>
 				@endif
 				    
-				    @if(!isAllowed(["admin", "normal_mod"]))
+				    @if(!isAllowed(["admin"]))
 				    @else
 					
 					<form class="d-inline" method="post" action="/admin/members/delete/{{$member->id }}">

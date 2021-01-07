@@ -80,7 +80,9 @@ function pollVisibleToMember($member, $poll) {
                         } 
                 }
                 return false;
-        }
+        }else {
+                return true;
+        } 
 } 
 
 function memberAllowedToVote($member, $poll)

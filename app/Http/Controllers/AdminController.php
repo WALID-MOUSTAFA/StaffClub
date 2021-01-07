@@ -259,6 +259,10 @@ class AdminController extends Controller
 
 
         public function postDeleteMember($id) {
+                if(!isAllowed(["admin"])){
+                        return back();
+                }
+
                 $member = \App\Models\Member::find($id);
                 $pic = $member->pic;
                 if($member->delete()) {

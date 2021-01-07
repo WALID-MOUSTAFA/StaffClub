@@ -35,6 +35,14 @@
 	<div class="card-body">
 
 	    <div class="my-4 float-left ">
+
+		@if(!isAllowed(["admin"]))
+		    <button type="submit" class="submit-delete disabled btn btn-danger">
+			حذف
+			<i class="fa fa-trash"></i>
+		    </button>
+
+		@else
 		<form class="d-inline " method="post" action="/admin/members/delete/{{$member->id }}">
 		    @csrf
 		    <button type="submit" class="submit-delete btn btn-danger">
@@ -42,6 +50,7 @@
 			<i class="fa fa-trash"></i>
 		    </button>
 		</form>
+		@endif
 
 	    </div>
 
@@ -118,7 +127,8 @@
 		</div>
 		
 
-		<button class="btn btn-warning btn-block"> تعديل
+		<button class="btn btn-warning btn-block">
+		    حفظ التعديل
 		    <i class="fa fa-edit"></i>
 		</button>
 		

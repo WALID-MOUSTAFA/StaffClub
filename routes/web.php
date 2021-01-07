@@ -69,7 +69,10 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
 
         Route::get("/admin", "App\Http\Controllers\AdminController@index")
                 ->middleware("checkIfMod");
-
+        
+        Route::get("/admin/info", "App\Http\Controllers\AdminInfo@index")
+                ->middleware("checkIfMod");
+        
         
         Route::get("/admin/mods/login", "App\Http\Controllers\ModsController@getLogin")
                 ->withoutMiddleware([\App\Http\Middleware\LogUserOut::class]);

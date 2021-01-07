@@ -29,15 +29,23 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav ml-auto">
-
+			
 
 			 @if(isAnyPollsToVote())
 			     <li class="mx-2">
 				 <a class=" my-1 mt-2 btn btn-warning slide-top" href="/polls">
 				     الاستبيانات
+				     <i class="fas fa-poll"></i>
 				 </a>
 			     </li>
 			 @endif
+
+			 <li class="mx-2">
+			     <a class="btn btn-success" href="/">
+				 الرئيسية
+				 <i class="fa fa-home"></i>
+			     </a>
+			 </li> 
 			 
 			 <li>
 			 <a class="btn btn-danger" href="/logout">

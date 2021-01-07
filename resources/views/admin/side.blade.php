@@ -69,8 +69,21 @@
 		      </a>
 		  </li>
 	      @endif
-	
-	    
+	      
+	      
+	      @if(!isAllowed(["admin", "normal_mod"]))
+	      @else
+		  <li class="nav-item has-treeview ">
+		      <a href="/admin/info" class="nav-link {{ request()->is('admin/info*') ? 'active' : '' }}">
+			  <i class="nav-icon fas fa-tachometer-alt"></i>
+			  <p>
+			      معلومات عامة
+			      <i class="right fas fa-angle-left"></i>
+			  </p>
+		      </a>
+		  </li>
+	      @endif
+
 
 	    
 	</ul>

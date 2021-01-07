@@ -269,7 +269,7 @@
 		</a>
 	    @endif
 	    
-	    @if(!isAllowed(["admin", "normal_mod"]))
+	    @if(!isAllowed(["admin"]))
 	    @else
 		
 		<form class="d-inline" method="post" action="/admin/members/delete/{{$member->id }}">

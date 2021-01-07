@@ -27,9 +27,6 @@ div.login-wrapper .form-wrapper p {
 
 }
 
-.login-wrapper .form-wrapper  .errors
-{    width: 50%;
-}
 
 
 div.login-wrapper .form-wrapper form .input-wrapper {
@@ -37,6 +34,17 @@ div.login-wrapper .form-wrapper form .input-wrapper {
     /* margin: auto; */
     margin-bottom: 1rem;
 }
+
+@media all and (max-width: 768px){
+
+    div.login-wrapper .form-wrapper form .input-wrapper {
+	width: 100%;
+	margin-bottom: 1rem;
+
+    }
+
+}
+
 
 div.login-wrapper .form-wrapper form input {
     background-color: #f2f2f2;

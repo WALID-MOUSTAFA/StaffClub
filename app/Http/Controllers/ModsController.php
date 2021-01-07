@@ -248,6 +248,11 @@ class ModsController extends Controller
         
         public function postDeleteMod($id) {
                 $mod = \App\Models\Mod::find($id);
+
+                if(!isAllowed(["admin"]) || $mod->role != 1) {
+                        return back();
+                }
+
                 $pic=$mod->pic;
                 if($mod->delete()) {
                         if($pic != null) {

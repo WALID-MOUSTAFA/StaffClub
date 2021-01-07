@@ -126,6 +126,11 @@ class FamilyRelativeController extends Controller
                                                             ->withInput();
                         }
 
+                        if($relative->pic != null) {
+                                deletePicFromDisk($relative->pic);
+                        }
+
+                        
                         $name= $pic->store("uploads");
                         $name=substr($name, strlen("uploads/"));
                         $pic=$name;
@@ -169,8 +174,14 @@ class FamilyRelativeController extends Controller
 
         public function deleteRelative($id) {
                 $relative= \App\Models\FamilyRelative::find($id);
+                $pic = $relative->pic;
+                
                 if($relative != null) {
                         $relative->delete();
+                        if($pic != null) {
+                                deletePicFromDisk($pic);
+                        }
+
                         session()->flash("delete-relative-success", "تم الحذف بنجاح");
                         return back();
                 } else {
