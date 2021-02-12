@@ -104,22 +104,22 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-3 stat-box">
                         <i class="fa fa-user fa-fw fa-5x"></i>
-                        <span class="number">624</span>
+                        <span class="number">2343</span>
                         <p>عدد اعضاء هيئة التدريس</p>
                     </div>
                     <div class="col-sm-6 col-lg-3 stat-box">
                         <i class="fa fa-user-plus fa-fw fa-5x"></i>
-                        <span class="number">624</span>
+                        <span class="number">-</span>
                         <p>عدد الاعضاءالذين قاموا باضافة بيناتهم</p>
                     </div>
                     <div class="col-sm-6 col-lg-3 stat-box">
                         <i class="fa fa-users fa-fw fa-5x"></i>
-                        <span class="number">624</span>
+                        <span class="number">-</span>
                         <p>عدد الاسر الذين قاموا باضافة بيناتهم</p>
                     </div>
                     <div class="col-sm-6 col-lg-3 stat-box">
                         <i class="fa fa-map fa-fw fa-5x"></i>
-                        <span class="number">624</span>
+                        <span class="number">1000م</span>
                         <p>مساحة النادي</p>
                     </div>
                 </div>

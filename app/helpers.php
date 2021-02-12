@@ -154,3 +154,15 @@ function getTitleSlug($title, $required_slug)
                 return "";
         } 
 }
+
+
+function uploadImage($file) {
+
+        $name= $file->store("uploads");
+        if(!$name) {
+                return null;
+        }
+        $name=substr($name, strlen("uploads/"));
+        return $name;
+
+}

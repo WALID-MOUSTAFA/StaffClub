@@ -212,7 +212,13 @@ Route::middleware([\App\Http\Middleware\LogUserOut::class])->group(function () {
         Route::get("/admin/search", "App\Http\Controllers\SearchController@index")
                 ->middleware("checkIfMod");
 
+
+        ###################news###################
+        Route::Resource("/admin/news", "App\Http\Controllers\NewsController")
+                ->middleware("checkIfMod");
+        
 });
+
 
 
 

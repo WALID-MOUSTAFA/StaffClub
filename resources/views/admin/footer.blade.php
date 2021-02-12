@@ -44,10 +44,9 @@
 <script src="{{asset('/css/adminlte3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/css/adminlte3/dist/js/adminlte.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('/css/adminlte3/dist/js/pages/dashboard.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('/css/adminlte3/dist/js/demo.js')}}"></script>
+{{-- <script src="{{asset('/css/adminlte3/dist/js/pages/dashboard.js')}}"></script> --}}
+{{--<!-- AdminLTE for demo purposes -->--}}
+ {{--  <script src="{{asset('/css/adminlte3/dist/js/demo.js')}}"></script> --}}
 <script src="{{asset('/scripts/admin.js')}}"></script>
 
 @stack("scripts")
