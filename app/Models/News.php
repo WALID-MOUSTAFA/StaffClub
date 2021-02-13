@@ -17,4 +17,8 @@ class News extends Model
         public function mod() {
                 return $this->belongsTo(\App\Models\Mod::class);
         }
+
+        public function news_images() {
+                return $this->hasMany(\App\Models\NewsImage::class);
+        }
 }

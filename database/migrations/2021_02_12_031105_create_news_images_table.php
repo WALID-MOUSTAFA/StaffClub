@@ -18,7 +18,8 @@ class CreateNewsImagesTable extends Migration
             $table->timestamps();
             $table->text("image");
             $table->unsignedBigInteger("news_id");
-
+            $table->boolean("featured")->default(false);
+            
             $table->foreign("news_id")->references("id")->on("news")
                   ->onDelete("cascade");
 
