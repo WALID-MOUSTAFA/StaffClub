@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class NewsImage extends Model
 {
     use HasFactory;
-
+        
         protected $image;
+        protected $featured;
+        
         public function news() {
                 return $this->belongsTo(\App\Models\News::class);
         }

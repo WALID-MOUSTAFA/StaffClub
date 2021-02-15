@@ -125,6 +125,8 @@ class NewsController extends Controller
                 $validaor= Validator::make(request()->all(), [
                         "title"=> "required",
                         "content"=> "required",
+                        "image"=> "between:0,2048|mimes:jpeg,png,svg,gif"
+
                         
                 ], ["content.required"=> "محتوى الخبر لا يمكن ان يكون فارغا",
                 ], []) ;
@@ -150,7 +152,6 @@ class NewsController extends Controller
 
                 
                 $success= $this->updateNews($news,
-                                            $validaor,
                                           $title,
                                           $content,
                                           $active,
@@ -214,7 +215,7 @@ class NewsController extends Controller
                         $news_image= new \App\Models\NewsImage();
                         $news_image->news()->associate($news);
                         $news_image->image=$image;
-                        $news_image->featured_image= true;
+                        $news_image->featured= true;
                         $news_image->save();
                         return true;
                         
@@ -225,7 +226,7 @@ class NewsController extends Controller
         }
 
 
-        public function updateNews($news,$validator, $title, $content, $active,  $mod) {
+        public function updateNews($news, $title, $content, $active,  $mod) {
                 $image= "";
                 $news->title= $title;
                 $news->content= $content;
@@ -237,15 +238,8 @@ class NewsController extends Controller
                         if(request()->hasFile("image")
                            && request()->file("image") != null) {
                                 $image= "";
-                                $image=request()->file("pic");
-                                $validator
-                                        ->getMessageBag()
-                                        ->add("image",
-                                              "between:0,2048|mimes:jpeg,png,svg,gif");
-                                if($validator->fails()) {
-                                        return back()->withErrors($validator)
-                                                     ->withInput();
-                                }
+                                $image=request()->file("image");
+
                                 //delete old featured image from db and disk;
                                 $old_image= $news->news_images()->where(
                                         "featured", "=",  1
@@ -253,6 +247,7 @@ class NewsController extends Controller
 
                                 if($old_image) {
                                         deletePicFromDisk($old_image->image);
+                                        $old_image->delete();
                                 }
                                 
                                 $returned_name=

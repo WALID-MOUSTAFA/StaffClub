@@ -72,8 +72,8 @@
 
 
 		    
-		<button class="btn btn-block my-4 w-50 btn-primary float-left">
-		    إنشاء
+		<button class="btn btn-block my-4 w-50 btn-warning float-left">
+		    حفظ التعديل
 		    <i class="fa fa-plus"></i>
 		</button>
 		
