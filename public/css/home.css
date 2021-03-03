@@ -238,9 +238,34 @@ body{direction: rtl;}
 
 /* news styles */
 
+
+.video-wrapper{
+        background-color: #f5f8fa;
+	padding: 30px;
+}
+
+
+.video-wrapper iframe{
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #085260 ;
+}
+
+@media(min-width: 600px) {
+    
+.video-wrapper iframe{
+    display: block;
+    margin: 10px auto;
+    height: 450px;
+    width: 700px;
+}
+
+}
+
 .news-wrapper{
         background-color: #f5f8fa;
 }
+
 
 
 .text-red {

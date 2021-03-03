@@ -70,7 +70,8 @@
 		  </li>
 	      @endif
 
-	      
+
+	      @if(false)
 	      @if(!isAllowed(["admin", "normal_mod"]))
 	      @else
 		  <li class="nav-item has-treeview ">
@@ -83,7 +84,7 @@
 		      </a>
 		  </li>
 	      @endif
-
+	      @endif
 	      
 	      @if(!isAllowed(["admin", "normal_mod"]))
 	      @else

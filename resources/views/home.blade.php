@@ -2,7 +2,24 @@
 
 @section("content")
 
-    @if($news)
+    @if(true)
+	<div class="video-wrapper">
+	    <p class="py-4 h2 text-center ">
+	    <span class="text-blue">  فيديو </span>
+	    <span class="text-red"> توضيحي  </span>
+	    </p>
+	    
+	    <iframe  src="https://drive.google.com/file/d/1zmT76QRKSVnmVES6L6XKTdxlWCW9FSF9/preview"
+		     frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
+			  picture-in-picture" allowfullscreen></iframe>
+	    
+	</div>
+
+	
+
+    @endif
+    
+    @if(false)
     <!-- start news -->
     <div class="news-wrapper">
 	<div class="container">
@@ -10,7 +27,7 @@
 	    <p class="py-4 h2 text-center ">
 	    <span class="text-blue"> الأخبار </span>
 	    <span class="text-red"> والفعاليات </span>
-	</p>
+	    </p>
 	<div class="py-4 row">
 
 	    @if(count($news) >= 2)
