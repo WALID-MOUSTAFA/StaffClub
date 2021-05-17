@@ -111,7 +111,7 @@
                             <ul class="list-unstyled">
                                 <li>  <strong>العنوان:</strong> اخميم - الصوامعه، قسم ثان سوهاج، سوهاج      </li>
                                 <li>  <strong>الموبيل:</strong> +20934603218  </li>
-                                <li> <strong>الايميل:</strong> <a href="#">info@info.com</a></li>
+                                <!-- <li> <strong>الايميل:</strong> <a href="#">info@info.com</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -130,20 +130,13 @@
                 <div class="row">
                     <div class="col-sm-6 text-center text-sm-right text-uppercase">
                         <p>وحدة البرمجيات - مركز الخدمات الالكترونية و المعرفية - جامعة سوهاج</p>
-                    </div>
+			 <p class="text-center"> مدير مركز الخدمات : ا. د محمود ابو العز</p>
+                         <p class="text-center">مدير الوحدة : المهندسة أسماء أبوالدهب </p>
+		    </div>
                     <div class="col-sm-6 text-center text-sm-left">
                         <ul class="list-unstyled">
                             <li>
                                 <a href="https://www.facebook.com/sohagstaffclub/"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fab fa-behance"></i></a>
                             </li>
                         </ul>
                     </div>
